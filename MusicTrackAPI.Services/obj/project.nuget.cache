@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "nPipBUpG0H9Guc1VZmAxz1md49Ed3MH8u2nYUUl4HIzdQdDKntSfBgnyF4nFlgYn3SqUtWKxHtrMSn0ASgvOag==",
+  "success": true,
+  "projectFilePath": "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Services/MusicTrackAPI.Services.csproj",
+  "expectedPackageFiles": [
+    "/Users/rosennikolov/.nuget/packages/automapper/11.0.1/automapper.11.0.1.nupkg.sha512",
+    "/Users/rosennikolov/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512"
+  ],
+  "logs": []
+}

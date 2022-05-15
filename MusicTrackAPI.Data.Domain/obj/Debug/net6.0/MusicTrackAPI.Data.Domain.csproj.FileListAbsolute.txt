@@ -1,0 +1,12 @@
+/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Data.Domain/bin/Debug/net6.0/MusicTrackAPI.Data.Domain.deps.json
+/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Data.Domain/bin/Debug/net6.0/MusicTrackAPI.Data.Domain.dll
+/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Data.Domain/bin/Debug/net6.0/MusicTrackAPI.Data.Domain.pdb
+/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Data.Domain/obj/Debug/net6.0/MusicTrackAPI.Data.Domain.csproj.AssemblyReference.cache
+/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Data.Domain/obj/Debug/net6.0/MusicTrackAPI.Data.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Data.Domain/obj/Debug/net6.0/MusicTrackAPI.Data.Domain.AssemblyInfoInputs.cache
+/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Data.Domain/obj/Debug/net6.0/MusicTrackAPI.Data.Domain.AssemblyInfo.cs
+/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Data.Domain/obj/Debug/net6.0/MusicTrackAPI.Data.Domain.csproj.CoreCompileInputs.cache
+/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Data.Domain/obj/Debug/net6.0/MusicTrackAPI.Data.Domain.dll
+/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Data.Domain/obj/Debug/net6.0/refint/MusicTrackAPI.Data.Domain.dll
+/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Data.Domain/obj/Debug/net6.0/MusicTrackAPI.Data.Domain.pdb
+/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Data.Domain/obj/Debug/net6.0/ref/MusicTrackAPI.Data.Domain.dll

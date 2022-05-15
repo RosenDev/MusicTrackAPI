@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 25.0.1700.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicTrackAPI.Common", "MusicTrackAPI.Common\MusicTrackAPI.Common.csproj", "{1284AE8C-5794-4D03-BF34-7E8AAB7EB0FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicTrackAPI.Services.Model", "MusicTrackAPI.Services.Model\MusicTrackAPI.Services.Model.csproj", "{92CC9B2E-D787-433D-8412-10F48463DB66}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1284AE8C-5794-4D03-BF34-7E8AAB7EB0FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1284AE8C-5794-4D03-BF34-7E8AAB7EB0FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1284AE8C-5794-4D03-BF34-7E8AAB7EB0FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1284AE8C-5794-4D03-BF34-7E8AAB7EB0FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92CC9B2E-D787-433D-8412-10F48463DB66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92CC9B2E-D787-433D-8412-10F48463DB66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92CC9B2E-D787-433D-8412-10F48463DB66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92CC9B2E-D787-433D-8412-10F48463DB66}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {28F95EBF-2014-4943-9DDB-864D052BD0A9}
+	EndGlobalSection
+EndGlobal
