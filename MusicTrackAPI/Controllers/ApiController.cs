@@ -1,10 +1,13 @@
 ﻿using System;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MusicTrackAPI.Controllers
 {
 	[ApiController]
-	public class ApiController: ControllerBase
+	[Authorize]
+	[Route("api/[controller]")]
+	public class ApiController<TModel>: ControllerBase
 	{
 		public ApiController()
 		{

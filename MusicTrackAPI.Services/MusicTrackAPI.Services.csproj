@@ -8,8 +8,14 @@
 
   <ItemGroup>
     <None Remove="AutoMapper" />
+    <None Remove="Microsoft.AspNetCore.Authentication.JwtBearer" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.5" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MusicTrackAPI.Services.Model\MusicTrackAPI.Services.Model.csproj" />
+    <ProjectReference Include="..\MusicTrackAPI.Data\MusicTrackAPI.Data.csproj" />
   </ItemGroup>
 </Project>

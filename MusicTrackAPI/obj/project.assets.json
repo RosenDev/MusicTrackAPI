@@ -14,6 +14,19 @@
           "lib/net5.0/Autofac.dll": {}
         }
       },
+      "Autofac.Extensions.DependencyInjection/7.2.0": {
+        "type": "package",
+        "dependencies": {
+          "Autofac": "6.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0"
+        },
+        "compile": {
+          "lib/net6.0/Autofac.Extensions.DependencyInjection.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/Autofac.Extensions.DependencyInjection.dll": {}
+        }
+      },
       "AutoMapper/11.0.1": {
         "type": "package",
         "dependencies": {
@@ -48,7 +61,7 @@
           "lib/netstandard2.0/Humanizer.dll": {}
         }
       },
-      "Microsoft.AspNetCore.Authentication.JwtBearer/6.0.4": {
+      "Microsoft.AspNetCore.Authentication.JwtBearer/6.0.5": {
         "type": "package",
         "dependencies": {
           "Microsoft.IdentityModel.Protocols.OpenIdConnect": "6.10.0"
@@ -377,19 +390,19 @@
           "lib/net6.0/Pomelo.EntityFrameworkCore.MySql.dll": {}
         }
       },
-      "Swashbuckle.AspNetCore/6.3.0": {
+      "Swashbuckle.AspNetCore/6.3.1": {
         "type": "package",
         "dependencies": {
           "Microsoft.Extensions.ApiDescription.Server": "3.0.0",
-          "Swashbuckle.AspNetCore.Swagger": "6.3.0",
-          "Swashbuckle.AspNetCore.SwaggerGen": "6.3.0",
-          "Swashbuckle.AspNetCore.SwaggerUI": "6.3.0"
+          "Swashbuckle.AspNetCore.Swagger": "6.3.1",
+          "Swashbuckle.AspNetCore.SwaggerGen": "6.3.1",
+          "Swashbuckle.AspNetCore.SwaggerUI": "6.3.1"
         },
         "build": {
           "build/Swashbuckle.AspNetCore.props": {}
         }
       },
-      "Swashbuckle.AspNetCore.Swagger/6.3.0": {
+      "Swashbuckle.AspNetCore.Swagger/6.3.1": {
         "type": "package",
         "dependencies": {
           "Microsoft.OpenApi": "1.2.3"
@@ -404,10 +417,10 @@
           "Microsoft.AspNetCore.App"
         ]
       },
-      "Swashbuckle.AspNetCore.SwaggerGen/6.3.0": {
+      "Swashbuckle.AspNetCore.SwaggerGen/6.3.1": {
         "type": "package",
         "dependencies": {
-          "Swashbuckle.AspNetCore.Swagger": "6.3.0"
+          "Swashbuckle.AspNetCore.Swagger": "6.3.1"
         },
         "compile": {
           "lib/net6.0/Swashbuckle.AspNetCore.SwaggerGen.dll": {}
@@ -416,7 +429,7 @@
           "lib/net6.0/Swashbuckle.AspNetCore.SwaggerGen.dll": {}
         }
       },
-      "Swashbuckle.AspNetCore.SwaggerUI/6.3.0": {
+      "Swashbuckle.AspNetCore.SwaggerUI/6.3.1": {
         "type": "package",
         "compile": {
           "lib/net6.0/Swashbuckle.AspNetCore.SwaggerUI.dll": {}
@@ -502,7 +515,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore": "6.0.4",
+          "Microsoft.EntityFrameworkCore": "6.0.5",
           "MusicTrackAPI.Data.Domain": "1.0.0",
           "Pomelo.EntityFrameworkCore.MySql": "6.0.1"
         },
@@ -521,6 +534,32 @@
         },
         "runtime": {
           "bin/placeholder/MusicTrackAPI.Data.Domain.dll": {}
+        }
+      },
+      "MusicTrackAPI.Services/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "AutoMapper": "11.0.1",
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "6.0.5",
+          "MusicTrackAPI.Data": "1.0.0",
+          "MusicTrackAPI.Services.Model": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/MusicTrackAPI.Services.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/MusicTrackAPI.Services.dll": {}
+        }
+      },
+      "MusicTrackAPI.Services.Model/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/MusicTrackAPI.Services.Model.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/MusicTrackAPI.Services.Model.dll": {}
         }
       }
     }
@@ -545,6 +584,30 @@
         "lib/netstandard2.1/Autofac.dll",
         "lib/netstandard2.1/Autofac.pdb",
         "lib/netstandard2.1/Autofac.xml"
+      ]
+    },
+    "Autofac.Extensions.DependencyInjection/7.2.0": {
+      "sha512": "S2Jor8pTV+8QSs96ENq/FhGdnrWsntGs93z0OXYlIivUWGPNXQHNCjFPfSBeBlHClvJFEXMvlkY32bAKy2YkPg==",
+      "type": "package",
+      "path": "autofac.extensions.dependencyinjection/7.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "autofac.extensions.dependencyinjection.7.2.0.nupkg.sha512",
+        "autofac.extensions.dependencyinjection.nuspec",
+        "icon.png",
+        "lib/net5.0/Autofac.Extensions.DependencyInjection.dll",
+        "lib/net5.0/Autofac.Extensions.DependencyInjection.pdb",
+        "lib/net5.0/Autofac.Extensions.DependencyInjection.xml",
+        "lib/net6.0/Autofac.Extensions.DependencyInjection.dll",
+        "lib/net6.0/Autofac.Extensions.DependencyInjection.pdb",
+        "lib/net6.0/Autofac.Extensions.DependencyInjection.xml",
+        "lib/netstandard2.0/Autofac.Extensions.DependencyInjection.dll",
+        "lib/netstandard2.0/Autofac.Extensions.DependencyInjection.pdb",
+        "lib/netstandard2.0/Autofac.Extensions.DependencyInjection.xml",
+        "lib/netstandard2.1/Autofac.Extensions.DependencyInjection.dll",
+        "lib/netstandard2.1/Autofac.Extensions.DependencyInjection.pdb",
+        "lib/netstandard2.1/Autofac.Extensions.DependencyInjection.xml"
       ]
     },
     "AutoMapper/11.0.1": {
@@ -592,10 +655,10 @@
         "logo.png"
       ]
     },
-    "Microsoft.AspNetCore.Authentication.JwtBearer/6.0.4": {
-      "sha512": "joDS3+lD1i9qcdFLWP4D316t3bHpezmTNOzbMIf9ZcRPX4QTuiUutZcQn/kZplf3BiLHqwUChZXxPjCAMKaKAQ==",
+    "Microsoft.AspNetCore.Authentication.JwtBearer/6.0.5": {
+      "sha512": "E+/t8R6peNEWM+O6A2J3b7wzZzX6oAaKmphHA4Y1EDyjPtdabYnBsIqyG3eKoBKdIRmeR7xuds+F1aUN0i1DrQ==",
       "type": "package",
-      "path": "microsoft.aspnetcore.authentication.jwtbearer/6.0.4",
+      "path": "microsoft.aspnetcore.authentication.jwtbearer/6.0.5",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -603,7 +666,7 @@
         "THIRD-PARTY-NOTICES.TXT",
         "lib/net6.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll",
         "lib/net6.0/Microsoft.AspNetCore.Authentication.JwtBearer.xml",
-        "microsoft.aspnetcore.authentication.jwtbearer.6.0.4.nupkg.sha512",
+        "microsoft.aspnetcore.authentication.jwtbearer.6.0.5.nupkg.sha512",
         "microsoft.aspnetcore.authentication.jwtbearer.nuspec"
       ]
     },
@@ -1179,22 +1242,22 @@
         "pomelo.entityframeworkcore.mysql.nuspec"
       ]
     },
-    "Swashbuckle.AspNetCore/6.3.0": {
-      "sha512": "3TAV6JqsJF2F5e5d/tiQuW/TlzKXB/n2IcL5QR1FP8ArmLhmPkpeHiLZ3+1YnJ5840/X5ApvpRRJpM9809IjTg==",
+    "Swashbuckle.AspNetCore/6.3.1": {
+      "sha512": "JFk0+HHUPdjYuPhkpGBMLi2JtnEuWkE2pp0yXQp64DmeMe+Fb0hZyVNq/ENJ2vQNso7Zg+C758WmR/xyAl36bA==",
       "type": "package",
-      "path": "swashbuckle.aspnetcore/6.3.0",
+      "path": "swashbuckle.aspnetcore/6.3.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "build/Swashbuckle.AspNetCore.props",
-        "swashbuckle.aspnetcore.6.3.0.nupkg.sha512",
+        "swashbuckle.aspnetcore.6.3.1.nupkg.sha512",
         "swashbuckle.aspnetcore.nuspec"
       ]
     },
-    "Swashbuckle.AspNetCore.Swagger/6.3.0": {
-      "sha512": "+taHh7kowNF+tQo9a82avwDtfqhAC82jTZTqZwypDpauPvwavyVtJ7+ERxE+yDb6U/nOcMicMmDAGbqbJ2Pc+Q==",
+    "Swashbuckle.AspNetCore.Swagger/6.3.1": {
+      "sha512": "idAFh4xhyJHYHfdLVOOn+BmscBul1OQbWsnL6YPJE8tO/0y6S79hDCvs6OY5VI093/9+1pYY3j31Zet9yaDZjA==",
       "type": "package",
-      "path": "swashbuckle.aspnetcore.swagger/6.3.0",
+      "path": "swashbuckle.aspnetcore.swagger/6.3.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1210,14 +1273,14 @@
         "lib/netstandard2.0/Swashbuckle.AspNetCore.Swagger.dll",
         "lib/netstandard2.0/Swashbuckle.AspNetCore.Swagger.pdb",
         "lib/netstandard2.0/Swashbuckle.AspNetCore.Swagger.xml",
-        "swashbuckle.aspnetcore.swagger.6.3.0.nupkg.sha512",
+        "swashbuckle.aspnetcore.swagger.6.3.1.nupkg.sha512",
         "swashbuckle.aspnetcore.swagger.nuspec"
       ]
     },
-    "Swashbuckle.AspNetCore.SwaggerGen/6.3.0": {
-      "sha512": "8PRLtqCXTIfc+W/pcyab8GqHzHuFRZ3L+9/fix/ssVknwy/pbgkOqgzq9DGWfKz+MZReIp5ajZLR7bXioDdacQ==",
+    "Swashbuckle.AspNetCore.SwaggerGen/6.3.1": {
+      "sha512": "+uoBV4h/6NhCPLoTofSmuOnZ+usu4PW1jP6l4OHwPyu2frbYXGNpJsHs5uUXXn929OiVQkT8wo3Lj/o+P99Ejg==",
       "type": "package",
-      "path": "swashbuckle.aspnetcore.swaggergen/6.3.0",
+      "path": "swashbuckle.aspnetcore.swaggergen/6.3.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1233,14 +1296,14 @@
         "lib/netstandard2.0/Swashbuckle.AspNetCore.SwaggerGen.dll",
         "lib/netstandard2.0/Swashbuckle.AspNetCore.SwaggerGen.pdb",
         "lib/netstandard2.0/Swashbuckle.AspNetCore.SwaggerGen.xml",
-        "swashbuckle.aspnetcore.swaggergen.6.3.0.nupkg.sha512",
+        "swashbuckle.aspnetcore.swaggergen.6.3.1.nupkg.sha512",
         "swashbuckle.aspnetcore.swaggergen.nuspec"
       ]
     },
-    "Swashbuckle.AspNetCore.SwaggerUI/6.3.0": {
-      "sha512": "OmVLGzyeNBFUAx6E/bqrZW4uxfv9q2MtegYzeHv5Dj8N34ry8104d6OcyRIV4BhwHBSFD1rMvDlPciguFMtQ5w==",
+    "Swashbuckle.AspNetCore.SwaggerUI/6.3.1": {
+      "sha512": "JLm9hN67jh7RHsX3H30+tb432Li8xm/qV5lRyMMkyHYMfWitIuKAAdrpo2ILcHOIeH7CLMuOO2hp/iLBmE+Bkw==",
       "type": "package",
-      "path": "swashbuckle.aspnetcore.swaggerui/6.3.0",
+      "path": "swashbuckle.aspnetcore.swaggerui/6.3.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1256,7 +1319,7 @@
         "lib/netstandard2.0/Swashbuckle.AspNetCore.SwaggerUI.dll",
         "lib/netstandard2.0/Swashbuckle.AspNetCore.SwaggerUI.pdb",
         "lib/netstandard2.0/Swashbuckle.AspNetCore.SwaggerUI.xml",
-        "swashbuckle.aspnetcore.swaggerui.6.3.0.nupkg.sha512",
+        "swashbuckle.aspnetcore.swaggerui.6.3.1.nupkg.sha512",
         "swashbuckle.aspnetcore.swaggerui.nuspec"
       ]
     },
@@ -1424,19 +1487,31 @@
       "type": "project",
       "path": "../MusicTrackAPI.Data.Domain/MusicTrackAPI.Data.Domain.csproj",
       "msbuildProject": "../MusicTrackAPI.Data.Domain/MusicTrackAPI.Data.Domain.csproj"
+    },
+    "MusicTrackAPI.Services/1.0.0": {
+      "type": "project",
+      "path": "../MusicTrackAPI.Services/MusicTrackAPI.Services.csproj",
+      "msbuildProject": "../MusicTrackAPI.Services/MusicTrackAPI.Services.csproj"
+    },
+    "MusicTrackAPI.Services.Model/1.0.0": {
+      "type": "project",
+      "path": "../MusicTrackAPI.Services.Model/MusicTrackAPI.Services.Model.csproj",
+      "msbuildProject": "../MusicTrackAPI.Services.Model/MusicTrackAPI.Services.Model.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
       "AutoMapper.Contrib.Autofac.DependencyInjection >= 6.0.1",
       "Autofac >= 6.3.0",
-      "Microsoft.AspNetCore.Authentication.JwtBearer >= 6.0.4",
+      "Autofac.Extensions.DependencyInjection >= 7.2.0",
+      "Microsoft.AspNetCore.Authentication.JwtBearer >= 6.0.5",
       "Microsoft.EntityFrameworkCore >= 6.0.5",
       "Microsoft.EntityFrameworkCore.Design >= 6.0.5",
       "Microsoft.EntityFrameworkCore.Tools >= 6.0.5",
       "MusicTrackAPI.Data >= 1.0.0",
+      "MusicTrackAPI.Services >= 1.0.0",
       "Pomelo.EntityFrameworkCore.MySql >= 6.0.1",
-      "Swashbuckle.AspNetCore >= 6.3.0"
+      "Swashbuckle.AspNetCore >= 6.3.1"
     ]
   },
   "packageFolders": {
@@ -1470,6 +1545,9 @@
           "projectReferences": {
             "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Data/MusicTrackAPI.Data.csproj": {
               "projectPath": "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Data/MusicTrackAPI.Data.csproj"
+            },
+            "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Services/MusicTrackAPI.Services.csproj": {
+              "projectPath": "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Services/MusicTrackAPI.Services.csproj"
             }
           }
         }
@@ -1492,9 +1570,13 @@
             "target": "Package",
             "version": "[6.3.0, )"
           },
+          "Autofac.Extensions.DependencyInjection": {
+            "target": "Package",
+            "version": "[7.2.0, )"
+          },
           "Microsoft.AspNetCore.Authentication.JwtBearer": {
             "target": "Package",
-            "version": "[6.0.4, )"
+            "version": "[6.0.5, )"
           },
           "Microsoft.EntityFrameworkCore": {
             "target": "Package",
@@ -1518,7 +1600,7 @@
           },
           "Swashbuckle.AspNetCore": {
             "target": "Package",
-            "version": "[6.3.0, )"
+            "version": "[6.3.1, )"
           }
         },
         "imports": [
@@ -1539,7 +1621,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.202/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.203/RuntimeIdentifierGraph.json"
       }
     }
   }

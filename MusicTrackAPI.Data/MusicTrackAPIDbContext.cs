@@ -13,6 +13,8 @@ public class MusicTrackAPIDbContext: DbContext
 
     public DbSet<Playlist> Playlists { get; set; }
 
+    public DbSet<User> Users { get; set; }
+
 
     public MusicTrackAPIDbContext()
     {
@@ -22,20 +24,6 @@ public class MusicTrackAPIDbContext: DbContext
     public MusicTrackAPIDbContext(DbContextOptions options) : base(options)
     {
 
-    }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        base.OnConfiguring(optionsBuilder);
-
-
-        //Only for migrations
-        if (!optionsBuilder.IsConfigured)
-        {
-            var connectionString = "Server=127.0.0.1; Port=3306; Database=music_track_api; Uid=yourUserHere; Pwd=yourPassHere;";
-
-            optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
-        }
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

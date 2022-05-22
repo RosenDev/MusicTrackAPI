@@ -1,14 +1,24 @@
 ﻿using System.Text;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using MusicTrackAPI.Data;
+using MusicTrackAPI.Data.Repositories;
+using MusicTrackAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<MusicTrackAPIDbContext>(opts =>
 opts.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
 ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))));
+
+var container = new ContainerBuilder();
+
+container.RegisterGeneric(typeof(RepositoryBase<>)).As(typeof(IRepositoryBase<>)).InstancePerLifetimeScope(); ;
+container.RegisterType<UserRepository>().As<IUserRepository>().InstancePerLifetimeScope();
+container.RegisterType<AuthenticationService>().As<IAuthenticationService>().InstancePerLifetimeScope();
 
 builder.Services.AddAuthentication(x =>
 {
@@ -34,6 +44,10 @@ builder.Services.AddAuthentication(x =>
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+container.Populate(builder.Services);
+
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 
 var app = builder.Build();
 
