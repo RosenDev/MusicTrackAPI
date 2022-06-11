@@ -12,6 +12,6 @@ public class MySqlEntity : IEntity<int>
 
     public bool IsDeleted { get; set; }
 
-    public DateTime DeletedAt { get; set; }
+    public DateTime? DeletedAt { get; set; }
 }
 

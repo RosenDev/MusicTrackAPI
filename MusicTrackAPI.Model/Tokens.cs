@@ -1,5 +1,5 @@
 ﻿using System;
-namespace MusicTrackAPI.Services.Model
+namespace MusicTrackAPI.Model
 {
 	public class Tokens
 	{

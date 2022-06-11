@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace MusicTrackAPI.Services
 {
@@ -10,16 +11,13 @@ namespace MusicTrackAPI.Services
         public const int ITERATIONS = 100000; 
 
         public static string CreateHash(string input)
-        {
-            // Generate a salt
-            
+        {   
             byte[] salt = new byte[SALT_SIZE];
 
             RandomNumberGenerator.Create().GetBytes(salt);
 
-            // Generate the hash
             Rfc2898DeriveBytes pbkdf2 = new Rfc2898DeriveBytes(input, salt, ITERATIONS);
-            return pbkdf2.GetBytes(HASH_SIZE).ToString();
+            return Encoding.UTF8.GetString(pbkdf2.GetBytes(HASH_SIZE));
         }
     }
 }

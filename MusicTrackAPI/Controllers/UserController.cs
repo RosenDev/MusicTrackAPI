@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Autofac;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MusicTrackAPI.Services;
-using MusicTrackAPI.Services.Model;
+using MusicTrackAPI.Model;
 
 namespace MusicTrackAPI.Controllers
 {
@@ -10,31 +11,28 @@ namespace MusicTrackAPI.Controllers
         private readonly IAuthenticationService authenticationService;
         private readonly ILogger<UserController> logger;
 
-        public UserController(
-			IAuthenticationService authenticationService,
-			ILogger<UserController> logger
-			)
+        public UserController(ILifetimeScope container)
 		{
-            this.authenticationService = authenticationService;
-            this.logger = logger;
+            this.authenticationService = container.Resolve<IAuthenticationService>();
+            this.logger = container.Resolve<ILogger<UserController>>();
         }
 
 		[AllowAnonymous]
 		[HttpPost("login")]
-		public async Task<IActionResult> LoginAsync([FromBody]UserModel user, CancellationToken ct)
+        public async Task<IActionResult> LoginAsync([FromBody] UserLoginModel userLoginModel, CancellationToken ct)
         {
-			try
-			{
-				var tokens = await authenticationService.AuthenticateAsync(user, ct);
+            try
+            {
+                var tokens = await authenticationService.AuthenticateAsync(userLoginModel, ct);
 
 				return Ok(tokens);
 
-			}
+            }
             catch (Exception ex)
             {
-				logger.LogWarning(ex.Message);
+                logger.LogWarning(ex.Message);
 
-				return Unauthorized();
+                return Unauthorized();
             }
         }
 

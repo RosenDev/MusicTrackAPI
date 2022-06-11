@@ -55,7 +55,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.203/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.300/RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -136,18 +136,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.203/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.300/RuntimeIdentifierGraph.json"
         }
       }
     },
-    "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Services.Model/MusicTrackAPI.Services.Model.csproj": {
+    "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Model/MusicTrackAPI.Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Services.Model/MusicTrackAPI.Services.Model.csproj",
-        "projectName": "MusicTrackAPI.Services.Model",
-        "projectPath": "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Services.Model/MusicTrackAPI.Services.Model.csproj",
+        "projectUniqueName": "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Model/MusicTrackAPI.Model.csproj",
+        "projectName": "MusicTrackAPI.Model",
+        "projectPath": "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Model/MusicTrackAPI.Model.csproj",
         "packagesPath": "/Users/rosennikolov/.nuget/packages/",
-        "outputPath": "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Services.Model/obj/",
+        "outputPath": "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Model/obj/",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
@@ -191,7 +191,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.203/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.300/RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -223,8 +223,8 @@
               "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Data/MusicTrackAPI.Data.csproj": {
                 "projectPath": "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Data/MusicTrackAPI.Data.csproj"
               },
-              "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Services.Model/MusicTrackAPI.Services.Model.csproj": {
-                "projectPath": "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Services.Model/MusicTrackAPI.Services.Model.csproj"
+              "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Model/MusicTrackAPI.Model.csproj": {
+                "projectPath": "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Model/MusicTrackAPI.Model.csproj"
               }
             }
           }
@@ -263,7 +263,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.203/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.300/RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -313,15 +313,15 @@
           "dependencies": {
             "AutoMapper.Contrib.Autofac.DependencyInjection": {
               "target": "Package",
-              "version": "[6.0.1, )"
+              "version": "[6.1.0, )"
             },
             "Autofac": {
               "target": "Package",
-              "version": "[6.3.0, )"
+              "version": "[6.4.0, )"
             },
             "Autofac.Extensions.DependencyInjection": {
               "target": "Package",
-              "version": "[7.2.0, )"
+              "version": "[8.0.0, )"
             },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
@@ -370,7 +370,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.203/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.300/RuntimeIdentifierGraph.json"
         }
       }
     }

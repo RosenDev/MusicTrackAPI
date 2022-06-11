@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "m1W6icwMOSeSIDtpnSrhBKKsIUmosQKiO1c5dMvRe7XaTSbRqNow/2/c5GgrryE0GWMY/lIQJjinKVAIXv95Wg==",
+  "dgSpecHash": "c/SERkyBH3DoL2AhDOYke7v1MZDXCqG8d4a6fTZpORP9nTwORJ8b9+nUBchsCoktAYz7HdJxzqRLzbyPCbWHqQ==",
   "success": true,
   "projectFilePath": "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Tests/MusicTrackAPI.Tests.csproj",
   "expectedPackageFiles": [

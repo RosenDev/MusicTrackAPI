@@ -390,14 +390,14 @@
           "bin/placeholder/MusicTrackAPI.Data.Domain.dll": {}
         }
       },
-      "MusicTrackAPI.Services.Model/1.0.0": {
+      "MusicTrackAPI.Model/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "compile": {
-          "bin/placeholder/MusicTrackAPI.Services.Model.dll": {}
+          "bin/placeholder/MusicTrackAPI.Model.dll": {}
         },
         "runtime": {
-          "bin/placeholder/MusicTrackAPI.Services.Model.dll": {}
+          "bin/placeholder/MusicTrackAPI.Model.dll": {}
         }
       }
     }
@@ -1087,10 +1087,10 @@
       "path": "../MusicTrackAPI.Data.Domain/MusicTrackAPI.Data.Domain.csproj",
       "msbuildProject": "../MusicTrackAPI.Data.Domain/MusicTrackAPI.Data.Domain.csproj"
     },
-    "MusicTrackAPI.Services.Model/1.0.0": {
+    "MusicTrackAPI.Model/1.0.0": {
       "type": "project",
-      "path": "../MusicTrackAPI.Services.Model/MusicTrackAPI.Services.Model.csproj",
-      "msbuildProject": "../MusicTrackAPI.Services.Model/MusicTrackAPI.Services.Model.csproj"
+      "path": "../MusicTrackAPI.Model/MusicTrackAPI.Model.csproj",
+      "msbuildProject": "../MusicTrackAPI.Model/MusicTrackAPI.Model.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -1098,7 +1098,7 @@
       "AutoMapper >= 11.0.1",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 6.0.5",
       "MusicTrackAPI.Data >= 1.0.0",
-      "MusicTrackAPI.Services.Model >= 1.0.0"
+      "MusicTrackAPI.Model >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -1133,8 +1133,8 @@
             "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Data/MusicTrackAPI.Data.csproj": {
               "projectPath": "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Data/MusicTrackAPI.Data.csproj"
             },
-            "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Services.Model/MusicTrackAPI.Services.Model.csproj": {
-              "projectPath": "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Services.Model/MusicTrackAPI.Services.Model.csproj"
+            "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Model/MusicTrackAPI.Model.csproj": {
+              "projectPath": "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Model/MusicTrackAPI.Model.csproj"
             }
           }
         }
@@ -1173,7 +1173,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.203/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.300/RuntimeIdentifierGraph.json"
       }
     }
   }

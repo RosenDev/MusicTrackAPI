@@ -5,7 +5,7 @@ namespace MusicTrackAPI.Data.Repositories
 {
     public class UserRepository: RepositoryBase<User>, IUserRepository
 	{
-        public UserRepository(MusicTrackAPIDbContext context, DbSet<User> set) : base(context, set)
+        public UserRepository(MusicTrackAPIDbContext context) : base(context)
         {
         }
 

@@ -1,13 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "X5y+xiKflnca2wWcutvx/QrKIfRjRBkZzzmkBgXiezSSf3huxtGiG4VhMw/XeRSjTOU2Lg8vx7m2wi9uviC5TA==",
+  "dgSpecHash": "NWwfctsSPthZFBOsJCH//ZPyJsdh3gTC16x9Nmzt5ULC6N6BWGH0ke9X/nAWZ/nBBxMttUgf4a3Oba8V5+mO6A==",
   "success": true,
   "projectFilePath": "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI/MusicTrackAPI.csproj",
   "expectedPackageFiles": [
-    "/Users/rosennikolov/.nuget/packages/autofac/6.3.0/autofac.6.3.0.nupkg.sha512",
-    "/Users/rosennikolov/.nuget/packages/autofac.extensions.dependencyinjection/7.2.0/autofac.extensions.dependencyinjection.7.2.0.nupkg.sha512",
+    "/Users/rosennikolov/.nuget/packages/autofac/6.4.0/autofac.6.4.0.nupkg.sha512",
+    "/Users/rosennikolov/.nuget/packages/autofac.extensions.dependencyinjection/8.0.0/autofac.extensions.dependencyinjection.8.0.0.nupkg.sha512",
     "/Users/rosennikolov/.nuget/packages/automapper/11.0.1/automapper.11.0.1.nupkg.sha512",
-    "/Users/rosennikolov/.nuget/packages/automapper.contrib.autofac.dependencyinjection/6.0.1/automapper.contrib.autofac.dependencyinjection.6.0.1.nupkg.sha512",
+    "/Users/rosennikolov/.nuget/packages/automapper.contrib.autofac.dependencyinjection/6.1.0/automapper.contrib.autofac.dependencyinjection.6.1.0.nupkg.sha512",
     "/Users/rosennikolov/.nuget/packages/humanizer.core/2.8.26/humanizer.core.2.8.26.nupkg.sha512",
     "/Users/rosennikolov/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/6.0.5/microsoft.aspnetcore.authentication.jwtbearer.6.0.5.nupkg.sha512",
     "/Users/rosennikolov/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512",

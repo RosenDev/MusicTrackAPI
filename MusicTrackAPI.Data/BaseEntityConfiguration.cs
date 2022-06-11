@@ -12,6 +12,9 @@ namespace MusicTrackAPI.Data
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id)
                 .ValueGeneratedOnAdd();
+
+            builder.Property(x => x.CreatedAt)
+                .HasDefaultValue(DateTime.UtcNow);
         }
     }
 }

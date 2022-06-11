@@ -2,8 +2,8 @@
 {
     public interface IDeletable
 	{
-		bool IsDeleted { get; }
-		DateTime DeletedAt { get; }
+		bool IsDeleted { get; set; }
+		DateTime? DeletedAt { get; set; }
 	}
 }
 

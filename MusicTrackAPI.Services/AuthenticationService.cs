@@ -1,19 +1,16 @@
-﻿using System;
-using System.IdentityModel.Tokens.Jwt;
+﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using AutoMapper;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using MusicTrackAPI.Data;
 using MusicTrackAPI.Data.Domain;
 using MusicTrackAPI.Data.Repositories;
-using MusicTrackAPI.Services.Model;
+using MusicTrackAPI.Model;
 
 namespace MusicTrackAPI.Services
 {
-	public class AuthenticationService: IAuthenticationService
+    public class AuthenticationService: IAuthenticationService
 	{
         private readonly IConfiguration configuration;
         private readonly IMapper mapper;
@@ -21,7 +18,7 @@ namespace MusicTrackAPI.Services
 
         public AuthenticationService(
 			IConfiguration configuration,
-			MusicTrackAPIDbContext context,
+			IUserRepository userRepository,
 			IMapper mapper
 			)
 		{
@@ -30,20 +27,20 @@ namespace MusicTrackAPI.Services
             this.userRepository = userRepository;
         }
 
-        public async Task<Tokens> AuthenticateAsync(UserModel user, CancellationToken ct = default)
+        public async Task<Tokens> AuthenticateAsync(UserLoginModel userLoginModel, CancellationToken ct = default)
         {
-			var hashedPassword = PBKDF2HashGenerator.CreateHash(user.Password);
+			var hashedPassword = PBKDF2HashGenerator.CreateHash(userLoginModel.Password);
 
-			var userEntity = await userRepository.GetUserAsync(user.Username, ct);
+			var userEntity = await userRepository.GetUserAsync(userLoginModel.Username, ct);
 
 			if(userEntity == null)
             {
-				throw new ArgumentNullException(user.Username, "The user is not yet registered!");
+				throw new ArgumentNullException(userLoginModel.Username, "The user is not yet registered!");
             }
 
 			if(userEntity.Password != hashedPassword)
             {
-				throw new ArgumentNullException(user.Username, "Incorrect password!");
+				throw new ArgumentNullException(userLoginModel.Username, "Incorrect password!");
 			}
 
 			var tokenHandler = new JwtSecurityTokenHandler();
@@ -52,7 +49,7 @@ namespace MusicTrackAPI.Services
 			{
 				Subject = new ClaimsIdentity(new Claim[]
 			  {
-			 new Claim(ClaimTypes.Name, user.Username)
+			 new Claim(ClaimTypes.Name, userLoginModel.Username)
 			  }),
 				Expires = DateTime.UtcNow.AddMinutes(10),
 				SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature)

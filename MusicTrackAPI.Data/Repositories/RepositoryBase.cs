@@ -10,10 +10,10 @@ namespace MusicTrackAPI.Data.Repositories
 
         protected DbSet<TEntity> Set { get; }
 
-        public RepositoryBase(MusicTrackAPIDbContext context, DbSet<TEntity> set)
+        public RepositoryBase(MusicTrackAPIDbContext context)
 		{
             Context = context;
-            Set = set;
+            Set = context.Set<TEntity>();
         }
 
         

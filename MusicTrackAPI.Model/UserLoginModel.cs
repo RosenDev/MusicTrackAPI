@@ -1,8 +1,7 @@
-﻿using System;
-namespace MusicTrackAPI.Services.Model
+﻿namespace MusicTrackAPI.Model
 {
-	public class UserModel
-	{
+    public class UserLoginModel
+    {
         public string Username { get; set; }
 
         public string Password { get; set; }
