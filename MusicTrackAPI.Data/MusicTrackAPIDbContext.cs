@@ -23,14 +23,15 @@
 
         public MusicTrackAPIDbContext(DbContextOptions options) : base(options)
         {
-
+  
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-
+      
+            modelBuilder.HasCharSet("utf8");
+  
             foreach (var entityType in modelBuilder.Model.GetEntityTypes())
             {
                 if (typeof(IDeletable).IsAssignableFrom(entityType.ClrType))

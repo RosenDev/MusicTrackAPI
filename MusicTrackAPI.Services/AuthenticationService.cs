@@ -5,6 +5,7 @@ using AutoMapper;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using MusicTrackAPI.Data.Domain;
+using MusicTrackAPI.Data.Repositories;
 using MusicTrackAPI.Model;
 using MusicTrackAPI.Services.Interface;
 
@@ -14,31 +15,29 @@ namespace MusicTrackAPI.Services
 	{
         private readonly IConfiguration configuration;
         private readonly IMapper mapper;
-        private readonly IUserService userService;
+        private readonly IUserRepository userRepository;
 
         public AuthenticationService(
 			IConfiguration configuration,
-			IUserService userService,
+			IUserRepository userRepository,
 			IMapper mapper
 			)
 		{
             this.configuration = configuration;
             this.mapper = mapper;
-            this.userService = userService;
+            this.userRepository = userRepository;
         }
 
         public async Task<Tokens> AuthenticateAsync(UserLoginModel userLoginModel, CancellationToken ct = default)
         {
-			var hashedPassword = PBKDF2HashGenerator.CreateHash(userLoginModel.Password);
-
-			var userEntity = await userService.GetUserAsync(userLoginModel.Username, ct);
+			var userEntity = await userRepository.GetUserAsync(userLoginModel.Username, ct);
 
 			if(userEntity == null)
             {
 				throw new ArgumentNullException(userLoginModel.Username, "The user is not yet registered!");
             }
 
-			if(userEntity.Password != hashedPassword)
+			if(!PBKDF2HashGenerator.VerifyHash(userLoginModel.Password, userEntity.Password, userEntity.Salt))
             {
 				throw new ArgumentNullException(userLoginModel.Username, "Incorrect password!");
 			}
@@ -60,12 +59,14 @@ namespace MusicTrackAPI.Services
 
 		public async Task<Tokens> RegisterUserAsync(UserModel user, CancellationToken ct = default)
 		{
-			user.Password = PBKDF2HashGenerator.CreateHash(user.Password);
-
 			var userEntity = mapper.Map<User>(user);
 
+			var hashResult = PBKDF2HashGenerator.CreateHash(userEntity.Password);
+			
+			userEntity.Password = hashResult.Hash;
+			userEntity.Salt = hashResult.Salt;
 
-			await userService.CreateAsync(user, ct);
+			await userRepository.AddAsync(userEntity, ct);
 
 			var tokenHandler = new JwtSecurityTokenHandler();
 			var tokenKey = Encoding.UTF8.GetBytes(configuration["JWT:Key"]);
@@ -73,7 +74,7 @@ namespace MusicTrackAPI.Services
 			{
 				Subject = new ClaimsIdentity(new Claim[]
 			  {
-			 new Claim(ClaimTypes.Name, userEntity.Username)
+			 new Claim(ClaimTypes.Name, user.Username)
 			  }),
 				Expires = DateTime.UtcNow.AddMinutes(10),
 				SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature)

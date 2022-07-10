@@ -13,7 +13,10 @@ namespace MusicTrackAPI
 
             builder.Register(context => new MapperConfiguration(cfg =>
             {
-                CreateMap<User, UserModel>(cfg);
+                cfg.CreateMap<UserModel, User>()
+                .ForMember(x=>x.Salt, opts=>opts.Ignore());
+                cfg.CreateMap<User, UserModel>();
+
             })).AsSelf().SingleInstance();
 
             builder.Register(c =>

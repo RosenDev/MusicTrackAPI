@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7XM55ABBXoLG5QU1238v7kRN5qL2uKWuLrtxN+vOFIsTlkPmLt9Rj/uSPKUtx/uU2QB9D6OLI0SOpeUh1PGKEQ==",
+  "dgSpecHash": "Rk6OpGMSbBJ+MLrTT6ydDVj/vy+vcy+o0Az2DZZ74X0qfqAXLM6v0/Ll9of7MWL/1c6nc90P6Y3AKfXm0o8NOw==",
   "success": true,
-  "projectFilePath": "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Data.Domain/MusicTrackAPI.Data.Domain.csproj",
+  "projectFilePath": "C:\\dev\\MusicTrackAPI\\MusicTrackAPI.Data.Domain\\MusicTrackAPI.Data.Domain.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
