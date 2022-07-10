@@ -1,7 +1,7 @@
 ﻿using System;
 using MusicTrackAPI.Model;
 
-namespace MusicTrackAPI.Services
+namespace MusicTrackAPI.Services.Interface
 {
 	public interface IAuthenticationService
 	{

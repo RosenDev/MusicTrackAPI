@@ -5,8 +5,8 @@ using AutoMapper;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using MusicTrackAPI.Data.Domain;
-using MusicTrackAPI.Data.Repositories;
 using MusicTrackAPI.Model;
+using MusicTrackAPI.Services.Interface;
 
 namespace MusicTrackAPI.Services
 {
@@ -14,24 +14,24 @@ namespace MusicTrackAPI.Services
 	{
         private readonly IConfiguration configuration;
         private readonly IMapper mapper;
-        private readonly IUserRepository userRepository;
+        private readonly IUserService userService;
 
         public AuthenticationService(
 			IConfiguration configuration,
-			IUserRepository userRepository,
+			IUserService userService,
 			IMapper mapper
 			)
 		{
             this.configuration = configuration;
             this.mapper = mapper;
-            this.userRepository = userRepository;
+            this.userService = userService;
         }
 
         public async Task<Tokens> AuthenticateAsync(UserLoginModel userLoginModel, CancellationToken ct = default)
         {
 			var hashedPassword = PBKDF2HashGenerator.CreateHash(userLoginModel.Password);
 
-			var userEntity = await userRepository.GetUserAsync(userLoginModel.Username, ct);
+			var userEntity = await userService.GetUserAsync(userLoginModel.Username, ct);
 
 			if(userEntity == null)
             {
@@ -65,7 +65,7 @@ namespace MusicTrackAPI.Services
 			var userEntity = mapper.Map<User>(user);
 
 
-			await userRepository.AddAsync(userEntity, ct);
+			await userService.CreateAsync(user, ct);
 
 			var tokenHandler = new JwtSecurityTokenHandler();
 			var tokenKey = Encoding.UTF8.GetBytes(configuration["JWT:Key"]);

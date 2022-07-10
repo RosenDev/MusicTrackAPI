@@ -1,10 +1,3 @@
-/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI/obj/Debug/net6.0/MusicTrackAPI.csproj.AssemblyReference.cache
-/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI/obj/Debug/net6.0/MusicTrackAPI.GeneratedMSBuildEditorConfig.editorconfig
-/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI/obj/Debug/net6.0/MusicTrackAPI.AssemblyInfoInputs.cache
-/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI/obj/Debug/net6.0/MusicTrackAPI.AssemblyInfo.cs
-/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI/obj/Debug/net6.0/MusicTrackAPI.csproj.CoreCompileInputs.cache
-/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI/obj/Debug/net6.0/MusicTrackAPI.MvcApplicationPartsAssemblyInfo.cs
-/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI/obj/Debug/net6.0/MusicTrackAPI.MvcApplicationPartsAssemblyInfo.cache
 /Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI/bin/Debug/net6.0/appsettings.Development.json
 /Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI/bin/Debug/net6.0/appsettings.json
 /Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI/bin/Debug/net6.0/appsettings.Production.json
@@ -44,6 +37,13 @@
 /Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI/bin/Debug/net6.0/MusicTrackAPI.Services.pdb
 /Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI/bin/Debug/net6.0/MusicTrackAPI.Data.Domain.pdb
 /Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI/bin/Debug/net6.0/MusicTrackAPI.Model.pdb
+/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI/obj/Debug/net6.0/MusicTrackAPI.csproj.AssemblyReference.cache
+/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI/obj/Debug/net6.0/MusicTrackAPI.GeneratedMSBuildEditorConfig.editorconfig
+/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI/obj/Debug/net6.0/MusicTrackAPI.AssemblyInfoInputs.cache
+/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI/obj/Debug/net6.0/MusicTrackAPI.AssemblyInfo.cs
+/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI/obj/Debug/net6.0/MusicTrackAPI.csproj.CoreCompileInputs.cache
+/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI/obj/Debug/net6.0/MusicTrackAPI.MvcApplicationPartsAssemblyInfo.cs
+/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI/obj/Debug/net6.0/MusicTrackAPI.MvcApplicationPartsAssemblyInfo.cache
 /Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI/obj/Debug/net6.0/staticwebassets.build.json
 /Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI/obj/Debug/net6.0/staticwebassets.development.json
 /Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI/obj/Debug/net6.0/scopedcss/bundle/MusicTrackAPI.styles.css

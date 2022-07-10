@@ -4,14 +4,150 @@
     "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Tests/MusicTrackAPI.Tests.csproj": {}
   },
   "projects": {
-    "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Tests/MusicTrackAPI.Tests.csproj": {
+    "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Data.Domain/MusicTrackAPI.Data.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Tests/MusicTrackAPI.Tests.csproj",
-        "projectName": "MusicTrackAPI.Tests",
-        "projectPath": "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Tests/MusicTrackAPI.Tests.csproj",
+        "projectUniqueName": "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Data.Domain/MusicTrackAPI.Data.Domain.csproj",
+        "projectName": "MusicTrackAPI.Data.Domain",
+        "projectPath": "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Data.Domain/MusicTrackAPI.Data.Domain.csproj",
         "packagesPath": "/Users/rosennikolov/.nuget/packages/",
-        "outputPath": "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Tests/obj/",
+        "outputPath": "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Data.Domain/obj/",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "/Users/rosennikolov/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.301/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Data/MusicTrackAPI.Data.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Data/MusicTrackAPI.Data.csproj",
+        "projectName": "MusicTrackAPI.Data",
+        "projectPath": "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Data/MusicTrackAPI.Data.csproj",
+        "packagesPath": "/Users/rosennikolov/.nuget/packages/",
+        "outputPath": "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Data/obj/",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "/Users/rosennikolov/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Data.Domain/MusicTrackAPI.Data.Domain.csproj": {
+                "projectPath": "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Data.Domain/MusicTrackAPI.Data.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.6, )"
+            },
+            "Pomelo.EntityFrameworkCore.MySql": {
+              "target": "Package",
+              "version": "[6.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.301/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Model/MusicTrackAPI.Model.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Model/MusicTrackAPI.Model.csproj",
+        "projectName": "MusicTrackAPI.Model",
+        "projectPath": "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Model/MusicTrackAPI.Model.csproj",
+        "packagesPath": "/Users/rosennikolov/.nuget/packages/",
+        "outputPath": "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Model/obj/",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
@@ -41,33 +177,9 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-            "AutoFixture.AutoMoq": {
+            "Swashbuckle.AspNetCore.Swagger": {
               "target": "Package",
-              "version": "[4.17.0, )"
-            },
-            "AutoFixture.Xunit2": {
-              "target": "Package",
-              "version": "[4.17.0, )"
-            },
-            "Microsoft.NET.Test.Sdk": {
-              "target": "Package",
-              "version": "[16.11.0, )"
-            },
-            "coverlet.collector": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[3.1.0, )"
-            },
-            "xunit": {
-              "target": "Package",
-              "version": "[2.4.1, )"
-            },
-            "xunit.runner.visualstudio": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[2.4.3, )"
+              "version": "[6.3.1, )"
             }
           },
           "imports": [
@@ -85,7 +197,168 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.300/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.301/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Services/MusicTrackAPI.Services.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Services/MusicTrackAPI.Services.csproj",
+        "projectName": "MusicTrackAPI.Services",
+        "projectPath": "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Services/MusicTrackAPI.Services.csproj",
+        "packagesPath": "/Users/rosennikolov/.nuget/packages/",
+        "outputPath": "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Services/obj/",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "/Users/rosennikolov/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Data/MusicTrackAPI.Data.csproj": {
+                "projectPath": "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Data/MusicTrackAPI.Data.csproj"
+              },
+              "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Model/MusicTrackAPI.Model.csproj": {
+                "projectPath": "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Model/MusicTrackAPI.Model.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[11.0.1, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[6.0.6, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.301/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Tests/MusicTrackAPI.Tests.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Tests/MusicTrackAPI.Tests.csproj",
+        "projectName": "MusicTrackAPI.Tests",
+        "projectPath": "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Tests/MusicTrackAPI.Tests.csproj",
+        "packagesPath": "/Users/rosennikolov/.nuget/packages/",
+        "outputPath": "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Tests/obj/",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "/Users/rosennikolov/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Services/MusicTrackAPI.Services.csproj": {
+                "projectPath": "/Users/rosennikolov/Projects/MusicTrackAPI/MusicTrackAPI.Services/MusicTrackAPI.Services.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "AutoFixture.AutoMoq": {
+              "target": "Package",
+              "version": "[4.17.0, )"
+            },
+            "AutoFixture.Xunit2": {
+              "target": "Package",
+              "version": "[4.17.0, )"
+            },
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[17.2.0, )"
+            },
+            "coverlet.collector": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.2, )"
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.4.1, )"
+            },
+            "xunit.runner.visualstudio": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.4.5, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.301/RuntimeIdentifierGraph.json"
         }
       }
     }

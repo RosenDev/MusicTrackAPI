@@ -1,7 +1,7 @@
 ﻿using System;
 namespace MusicTrackAPI.Model
 {
-    public class UserModel
+    public class UserModel: ApiEntity
 	{
         public string Username { get; set; }
 

@@ -1,8 +1,9 @@
 ﻿namespace MusicTrackAPI.Data.Domain.Interface
 {
-    public interface IEntity<T> : IAuditInfo, IDeletable
+    public interface IEntity<TKey> : IAuditInfo, IDeletable
+		where TKey: struct
 	{
-		T Id { get; }
+		TKey Id { get; }
 	}
 }
 
