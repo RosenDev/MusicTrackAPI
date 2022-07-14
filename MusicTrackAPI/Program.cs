@@ -7,7 +7,8 @@ public class Program
     {
         var host = Host.CreateDefaultBuilder(args)
             .UseServiceProviderFactory(new AutofacServiceProviderFactory())
-            .ConfigureWebHostDefaults(webHostBuilder => {
+            .ConfigureWebHostDefaults(webHostBuilder =>
+            {
                 webHostBuilder
               .UseContentRoot(Directory.GetCurrentDirectory())
               .UseStartup<Startup>();

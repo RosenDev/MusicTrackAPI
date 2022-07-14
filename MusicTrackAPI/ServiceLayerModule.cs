@@ -5,7 +5,7 @@ using MusicTrackAPI.Services.Interface;
 namespace MusicTrackAPI
 {
     public class ServiceLayerModule : Module
-	{
+    {
         protected override void Load(ContainerBuilder builder)
         {
             base.Load(builder);

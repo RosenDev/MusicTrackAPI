@@ -6,28 +6,28 @@ using MusicTrackAPI.Services.Interface;
 
 namespace MusicTrackAPI.Controllers
 {
-	[ApiController]
-	[Authorize]
-	[Route("api/[controller]")]
-	public class ApiController<TEntity, TApiEntity>: ControllerBase
-		where TEntity: IEntity<int>
+    [ApiController]
+    [Authorize]
+    [Route("api/[controller]")]
+    public class ApiController<TEntity, TApiEntity> : ControllerBase
+        where TEntity : IEntity<int>
         where TApiEntity : IApiEntity<int>
     {
         private readonly IDataService<TEntity, TApiEntity> dataService;
 
         public ApiController(IDataService<TEntity, TApiEntity> dataService)
-		{
+        {
             this.dataService = dataService;
         }
 
-		[HttpGet]
-		public async Task<IActionResult> BulkGet()
+        [HttpGet]
+        public async Task<IActionResult> BulkGet()
         {
-			return Ok();
+            return Ok();
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById([FromRoute]int id, CancellationToken ct)
+        public async Task<IActionResult> GetById([FromRoute] int id, CancellationToken ct)
         {
             return Ok(await dataService.GetByIdAsync(id, ct));
         }

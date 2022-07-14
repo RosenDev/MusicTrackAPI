@@ -37,9 +37,6 @@
     <None Remove="Autofac.Extensions.DependencyInjection" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\MusicTrackAPI.Data\MusicTrackAPI.Data.csproj">
     </ProjectReference>
     <ProjectReference Include="..\MusicTrackAPI.Services\MusicTrackAPI.Services.csproj">

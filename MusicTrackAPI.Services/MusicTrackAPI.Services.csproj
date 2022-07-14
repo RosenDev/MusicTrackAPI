@@ -19,7 +19,4 @@
     <ProjectReference Include="..\MusicTrackAPI.Data\MusicTrackAPI.Data.csproj" />
     <ProjectReference Include="..\MusicTrackAPI.Model\MusicTrackAPI.Model.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Interface\" />
-  </ItemGroup>
 </Project>

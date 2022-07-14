@@ -4,10 +4,10 @@ using MusicTrackAPI.Data.Repositories;
 namespace MusicTrackAPI
 {
     public class DataLayerModule : Module
-	{ 
-		public DataLayerModule()
-		{
-		}
+    {
+        public DataLayerModule()
+        {
+        }
 
         protected override void Load(ContainerBuilder builder)
         {

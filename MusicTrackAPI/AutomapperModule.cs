@@ -6,7 +6,7 @@ using MusicTrackAPI.Model;
 namespace MusicTrackAPI
 {
     public class AutomapperModule : Module
-	{
+    {
         protected override void Load(ContainerBuilder builder)
         {
             base.Load(builder);
@@ -14,7 +14,7 @@ namespace MusicTrackAPI
             builder.Register(context => new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<UserModel, User>()
-                .ForMember(x=>x.Salt, opts=>opts.Ignore());
+                .ForMember(x => x.Salt, opts => opts.Ignore());
                 cfg.CreateMap<User, UserModel>();
 
             })).AsSelf().SingleInstance();
