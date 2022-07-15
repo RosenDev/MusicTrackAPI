@@ -45,5 +45,8 @@
     </ProjectReference>
     <ProjectReference Include="..\MusicTrackAPI.Data.Domain\MusicTrackAPI.Data.Domain.csproj">
     </ProjectReference>
+    <ProjectReference Include="..\MusicTrackAPI.Common\MusicTrackAPI.Common.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
   </ItemGroup>
 </Project>

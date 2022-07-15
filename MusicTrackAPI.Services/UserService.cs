@@ -2,6 +2,7 @@
 using AutoMapper;
 using MusicTrackAPI.Data.Domain;
 using MusicTrackAPI.Data.Repositories;
+using MusicTrackAPI.Data.Repositories.Interfaces;
 using MusicTrackAPI.Model;
 using MusicTrackAPI.Services.Interface;
 

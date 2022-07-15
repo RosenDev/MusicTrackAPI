@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using MusicTrackAPI.Data.Domain;
 using MusicTrackAPI.Data.Repositories;
+using MusicTrackAPI.Data.Repositories.Interfaces;
 using MusicTrackAPI.Model;
 using MusicTrackAPI.Services.Interface;
 
@@ -57,7 +58,7 @@ namespace MusicTrackAPI.Services
 			return new Tokens { Token = tokenHandler.WriteToken(token) };
 		}
 
-		public async Task<Tokens> RegisterUserAsync(UserModel user, CancellationToken ct = default)
+		public async Task<Tokens> RegisterUserAsync(UserRegisterModel user, CancellationToken ct = default)
 		{
 			var userEntity = mapper.Map<User>(user);
 

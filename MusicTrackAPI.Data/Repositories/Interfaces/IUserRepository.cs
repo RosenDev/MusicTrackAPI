@@ -1,7 +1,7 @@
 ﻿using System;
 using MusicTrackAPI.Data.Domain;
 
-namespace MusicTrackAPI.Data.Repositories
+namespace MusicTrackAPI.Data.Repositories.Interfaces
 {
 	public interface IUserRepository: IRepositoryBase<User>
 	{

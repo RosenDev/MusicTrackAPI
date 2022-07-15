@@ -21,31 +21,31 @@ namespace MusicTrackAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> BulkGet()
+        public virtual async Task<IActionResult> BulkGet()
         {
             return Ok();
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById([FromRoute] int id, CancellationToken ct)
+        public virtual async Task<IActionResult> GetById([FromRoute] int id, CancellationToken ct)
         {
             return Ok(await dataService.GetByIdAsync(id, ct));
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] TApiEntity apiModel, CancellationToken ct)
+        public virtual async Task<IActionResult> Create([FromBody] TApiEntity apiModel, CancellationToken ct)
         {
             return Ok(await dataService.CreateAsync(apiModel, ct));
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update([FromBody] TApiEntity apiModel, CancellationToken ct)
+        public virtual async Task<IActionResult> Update([FromBody] TApiEntity apiModel, CancellationToken ct)
         {
             return Ok(await dataService.UpdateAsync(apiModel, ct));
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete([FromRoute] int id, CancellationToken ct)
+        public virtual async Task<IActionResult> Delete([FromRoute] int id, CancellationToken ct)
         {
             return Ok(await dataService.DeleteAsync(id, ct));
         }

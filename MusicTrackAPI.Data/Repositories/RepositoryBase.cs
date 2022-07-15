@@ -1,6 +1,7 @@
 ﻿using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using MusicTrackAPI.Data.Domain;
+using MusicTrackAPI.Data.Repositories.Interfaces;
 
 namespace MusicTrackAPI.Data.Repositories
 {
@@ -17,7 +18,7 @@ namespace MusicTrackAPI.Data.Repositories
         }
 
         
-        public async Task<bool> DeleteAsync(int id, CancellationToken ct = default)
+        public virtual async Task<bool> DeleteAsync(int id, CancellationToken ct = default)
         {
             var entity = await Set.FindAsync(id);
 
@@ -30,17 +31,17 @@ namespace MusicTrackAPI.Data.Repositories
 
         }
 
-        public async Task<TEntity> FindAsync(int id, CancellationToken ct = default)
+        public virtual async Task<TEntity> FindAsync(int id, CancellationToken ct = default)
         {
             return await Set.FindAsync(new object[] { id }, ct);
         }
 
-        public async Task<List<TEntity>> QueryAsync(Expression<Func<TEntity, bool>> query, CancellationToken ct = default)
+        public virtual async Task<List<TEntity>> QueryAsync(Expression<Func<TEntity, bool>> query, CancellationToken ct = default)
         {
             return await Set.AsQueryable().AsNoTracking().Where(query).ToListAsync(ct);
         }
 
-        public async Task<TEntity> AddAsync(TEntity entity, CancellationToken ct = default)
+        public virtual async Task<TEntity> AddAsync(TEntity entity, CancellationToken ct = default)
         {
             Set.Add(entity);
 
@@ -49,7 +50,7 @@ namespace MusicTrackAPI.Data.Repositories
             return entity;
         }
 
-        public async Task<TEntity> UpdateAsync(TEntity entity, CancellationToken ct = default)
+        public virtual async Task<TEntity> UpdateAsync(TEntity entity, CancellationToken ct = default)
         {
             Set.Update(entity);
 

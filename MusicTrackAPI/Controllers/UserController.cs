@@ -1,6 +1,6 @@
-﻿using Autofac;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MusicTrackAPI.Common;
 using MusicTrackAPI.Data.Domain;
 using MusicTrackAPI.Model;
 using MusicTrackAPI.Services.Interface;
@@ -12,9 +12,9 @@ namespace MusicTrackAPI.Controllers
         private readonly IAuthenticationService authenticationService;
         private readonly IUserService userService;
 
-        public UserController(ILifetimeScope container, IUserService userService) : base(userService)
+        public UserController(IAuthenticationService authenticationService, IUserService userService) : base(userService)
         {
-            this.authenticationService = container.Resolve<IAuthenticationService>();
+            this.authenticationService = authenticationService;
             this.userService = userService;
         }
 
@@ -29,12 +29,16 @@ namespace MusicTrackAPI.Controllers
 
         [AllowAnonymous]
         [HttpPost("register")]
-        public async Task<IActionResult> RegisterAsync([FromBody] UserModel user, CancellationToken ct)
+        public async Task<IActionResult> RegisterAsync([FromBody] UserRegisterModel user, CancellationToken ct)
         {
-
             var tokens = await authenticationService.RegisterUserAsync(user, ct);
 
             return Ok(tokens);
+        }
+
+        public override Task<IActionResult> Create([FromBody] UserModel apiModel, CancellationToken ct)
+        {
+            return Task.FromResult((IActionResult)Forbid(ErrorMessages.UseRegisterEnpoint));
         }
 
         [HttpGet("getcurrentuser")]

@@ -1,7 +1,7 @@
 ﻿using System.Linq.Expressions;
 using MusicTrackAPI.Data.Domain.Interface;
 
-namespace MusicTrackAPI.Data.Repositories
+namespace MusicTrackAPI.Data.Repositories.Interfaces
 {
     public interface IRepositoryBase<TEntity> where TEntity: IEntity<int>
 	{
