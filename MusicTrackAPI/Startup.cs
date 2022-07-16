@@ -49,7 +49,8 @@ namespace MusicTrackAPI
             });
 
 
-            services.AddControllers();
+            services.AddControllers(options => options.UseDateOnlyTimeOnlyStringConverters())
+                .AddJsonOptions(options => options.UseDateOnlyTimeOnlyStringConverters());
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen(opt =>
             {

@@ -23,7 +23,7 @@ namespace MusicTrackAPI.Controllers
         public async Task<IActionResult> LoginAsync([FromBody] UserLoginModel userLoginModel, CancellationToken ct)
         {
             var tokens = await authenticationService.AuthenticateAsync(userLoginModel, ct);
-
+ 
             return Ok(tokens);
         }
 

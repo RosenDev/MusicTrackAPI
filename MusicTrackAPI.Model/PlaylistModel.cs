@@ -7,7 +7,7 @@ namespace MusicTrackAPI.Model
         public string Name { get; set; }
         public string TrackName { get; set; }
         public string AlbumName { get; set; }
-        public TimeSpan Duration { get; set; }
+        public TimeOnly Duration { get; set; }
         public bool IsPublic { get; set; }
     }
 }
