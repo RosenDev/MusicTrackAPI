@@ -30,12 +30,12 @@ namespace MusicTrackAPI.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2022, 7, 16, 13, 8, 42, 935, DateTimeKind.Utc).AddTicks(7428));
+                        .HasDefaultValue(new DateTime(2022, 7, 10, 20, 30, 5, 571, DateTimeKind.Utc).AddTicks(7886));
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<TimeOnly>("Duration")
+                    b.Property<TimeSpan>("Duration")
                         .HasColumnType("time(6)");
 
                     b.Property<bool>("IsDeleted")
@@ -55,7 +55,7 @@ namespace MusicTrackAPI.Data.Migrations
 
                     b.HasIndex("Name", "PublishingYear", "Duration");
 
-                    b.ToTable("Albums");
+                    b.ToTable("Albums", (string)null);
                 });
 
             modelBuilder.Entity("MusicTrackAPI.Data.Domain.Playlist", b =>
@@ -71,12 +71,12 @@ namespace MusicTrackAPI.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2022, 7, 16, 13, 8, 42, 935, DateTimeKind.Utc).AddTicks(9419));
+                        .HasDefaultValue(new DateTime(2022, 7, 10, 20, 30, 5, 571, DateTimeKind.Utc).AddTicks(9770));
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<TimeOnly>("Duration")
+                    b.Property<TimeSpan>("Duration")
                         .HasColumnType("time(6)");
 
                     b.Property<bool>("IsDeleted")
@@ -103,7 +103,7 @@ namespace MusicTrackAPI.Data.Migrations
 
                     b.HasIndex("CreatedAt", "Name");
 
-                    b.ToTable("Playlists");
+                    b.ToTable("Playlists", (string)null);
                 });
 
             modelBuilder.Entity("MusicTrackAPI.Data.Domain.Track", b =>
@@ -122,12 +122,12 @@ namespace MusicTrackAPI.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2022, 7, 16, 13, 8, 42, 936, DateTimeKind.Utc).AddTicks(1059));
+                        .HasDefaultValue(new DateTime(2022, 7, 10, 20, 30, 5, 572, DateTimeKind.Utc).AddTicks(1828));
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<TimeOnly>("Duration")
+                    b.Property<TimeSpan>("Duration")
                         .HasColumnType("time(6)");
 
                     b.Property<bool>("IsDeleted")
@@ -157,7 +157,7 @@ namespace MusicTrackAPI.Data.Migrations
 
                     b.HasIndex("ArrangedBy", "PerformedBy", "Name", "Type");
 
-                    b.ToTable("Tracks");
+                    b.ToTable("Tracks", (string)null);
                 });
 
             modelBuilder.Entity("MusicTrackAPI.Data.Domain.User", b =>
@@ -169,7 +169,7 @@ namespace MusicTrackAPI.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2022, 7, 16, 13, 8, 42, 936, DateTimeKind.Utc).AddTicks(3151));
+                        .HasDefaultValue(new DateTime(2022, 7, 10, 20, 30, 5, 572, DateTimeKind.Utc).AddTicks(4134));
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime(6)");
@@ -201,7 +201,7 @@ namespace MusicTrackAPI.Data.Migrations
                     b.HasIndex("Username")
                         .IsUnique();
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("MusicTrackAPI.Data.Domain.Track", b =>

@@ -5,6 +5,6 @@ public class Album : MySqlEntity
     public string Name { get; set; }
     public int PublishingYear { get; set; }
     public List<Track> Tracks { get; set; } = new List<Track>();
-    public TimeOnly Duration { get; set; }
+    public TimeSpan Duration { get; set; }
 }
 
