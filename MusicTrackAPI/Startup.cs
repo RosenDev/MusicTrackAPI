@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 using MusicTrackAPI.Data;
 using System.Text;
@@ -79,6 +80,12 @@ namespace MusicTrackAPI
                                 new string[]{}
                             }
                     });
+
+                opt.MapType<TimeSpan>(() => new OpenApiSchema
+                {
+                    Type = "string",
+                    Example = new OpenApiString("00:00:00")
+                });
             });
 
             services.AddOptions();
