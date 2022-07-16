@@ -23,6 +23,7 @@
     </PackageReference>
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="DateOnlyTimeOnly.AspNet.Swashbuckle" Version="1.0.3" />
+    <PackageReference Include="DateOnlyTimeOnly.AspNet" Version="1.0.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,6 +38,7 @@
     <None Remove="Microsoft.EntityFrameworkCore.Tools" />
     <None Remove="Autofac.Extensions.DependencyInjection" />
     <None Remove="DateOnlyTimeOnly.AspNet.Swashbuckle" />
+    <None Remove="DateOnlyTimeOnly.AspNet" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MusicTrackAPI.Data\MusicTrackAPI.Data.csproj">

@@ -54,11 +54,12 @@ namespace MusicTrackAPI
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen(opt =>
             {
+                opt.UseDateOnlyTimeOnlyStringConverters();
                 opt.SwaggerDoc("v1", new OpenApiInfo { Title = "MyAPI", Version = "v1" });
                 opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     In = ParameterLocation.Header,
-                    Description = "Please enter token",
+                    Description = "",
                     Name = "Authorization",
                     Type = SecuritySchemeType.Http,
                     BearerFormat = "JWT",

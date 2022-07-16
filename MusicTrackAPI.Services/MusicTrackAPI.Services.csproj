@@ -18,5 +18,6 @@
   <ItemGroup>
     <ProjectReference Include="..\MusicTrackAPI.Data\MusicTrackAPI.Data.csproj" />
     <ProjectReference Include="..\MusicTrackAPI.Model\MusicTrackAPI.Model.csproj" />
+    <ProjectReference Include="..\MusicTrackAPI.Common\MusicTrackAPI.Common.csproj" />
   </ItemGroup>
 </Project>
