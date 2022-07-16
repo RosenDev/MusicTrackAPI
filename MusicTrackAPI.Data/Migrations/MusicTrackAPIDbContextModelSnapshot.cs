@@ -30,12 +30,12 @@ namespace MusicTrackAPI.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2022, 7, 10, 20, 30, 5, 571, DateTimeKind.Utc).AddTicks(7886));
+                        .HasDefaultValue(new DateTime(2022, 7, 16, 13, 8, 42, 935, DateTimeKind.Utc).AddTicks(7428));
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<TimeSpan>("Duration")
+                    b.Property<TimeOnly>("Duration")
                         .HasColumnType("time(6)");
 
                     b.Property<bool>("IsDeleted")
@@ -71,12 +71,12 @@ namespace MusicTrackAPI.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2022, 7, 10, 20, 30, 5, 571, DateTimeKind.Utc).AddTicks(9770));
+                        .HasDefaultValue(new DateTime(2022, 7, 16, 13, 8, 42, 935, DateTimeKind.Utc).AddTicks(9419));
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<TimeSpan>("Duration")
+                    b.Property<TimeOnly>("Duration")
                         .HasColumnType("time(6)");
 
                     b.Property<bool>("IsDeleted")
@@ -122,12 +122,12 @@ namespace MusicTrackAPI.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2022, 7, 10, 20, 30, 5, 572, DateTimeKind.Utc).AddTicks(1828));
+                        .HasDefaultValue(new DateTime(2022, 7, 16, 13, 8, 42, 936, DateTimeKind.Utc).AddTicks(1059));
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<TimeSpan>("Duration")
+                    b.Property<TimeOnly>("Duration")
                         .HasColumnType("time(6)");
 
                     b.Property<bool>("IsDeleted")
@@ -169,7 +169,7 @@ namespace MusicTrackAPI.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2022, 7, 10, 20, 30, 5, 572, DateTimeKind.Utc).AddTicks(4134));
+                        .HasDefaultValue(new DateTime(2022, 7, 16, 13, 8, 42, 936, DateTimeKind.Utc).AddTicks(3151));
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime(6)");
