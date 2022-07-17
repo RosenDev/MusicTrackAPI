@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MusicTrackAPI.Data;
 
@@ -10,9 +11,10 @@ using MusicTrackAPI.Data;
 namespace MusicTrackAPI.Data.Migrations
 {
     [DbContext(typeof(MusicTrackAPIDbContext))]
-    partial class MusicTrackAPIDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220717230454_ChangePlaylistEntity")]
+    partial class ChangePlaylistEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
