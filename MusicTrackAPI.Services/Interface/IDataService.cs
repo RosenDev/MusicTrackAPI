@@ -15,7 +15,7 @@ namespace MusicTrackAPI.Services.Interface
 
              Task<TApiEntity> GetByIdAsync(int id, CancellationToken ct);
 
-             Task<TApiEntity> QueryAsync(Paging paging, CancellationToken ct);
+             Task<PagedResponse<TApiEntity>> QueryAsync(List<FieldFilter> filters, Paging paging, CancellationToken ct);
 
              Task<bool> DeleteAsync(int id, CancellationToken ct);
         }

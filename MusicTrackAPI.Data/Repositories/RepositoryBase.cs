@@ -37,16 +37,18 @@ namespace MusicTrackAPI.Data.Repositories
             return await Set.FindAsync(new object[] { id }, ct);
         }
 
-        public virtual async Task<List<TEntity>> QueryAsync(List<Expression<Func<TEntity, bool>>> query, Paging paging, CancellationToken ct = default)
+        public virtual async Task<List<TEntity>> QueryAsync(List<Expression<Func<TEntity, bool>>> query, Paging paging, CancellationToken ct)
         {
-            Expression<Func<TEntity, bool>> queryExpression = x => true;
-            Expression<Func<TEntity, bool>>fakeExpression = x => true;
-            var expr = Expression.And(queryExpression, fakeExpression);
-            query.ForEach(x => { expr = Expression.And(expr, x); });
+            Expression<Func<TEntity, bool>> fakeExpression = x => true;
+            var queryExpression = Expression.And(fakeExpression, fakeExpression);
+
+            query.ForEach(x => { queryExpression = Expression.And(queryExpression, x); });
+
+            var lambdaExpression = Expression.Lambda<Func<TEntity, bool>>(queryExpression, new ParameterExpression[] { Expression.Parameter(typeof(TEntity)) });
 
             return await Set.AsQueryable().AsNoTracking()
-                .Where(x=> Expression.Lambda<Func<TEntity, bool>>(expr, new ParameterExpression[] {Expression.Parameter(typeof(TEntity))}).Compile()(x))
-                .Skip(paging.Page)
+                .Where(x=> lambdaExpression.Compile()(x))
+                .Skip(paging.Page - 1)
                 .Take(paging.Size)
                 .ToListAsync(ct);
         }

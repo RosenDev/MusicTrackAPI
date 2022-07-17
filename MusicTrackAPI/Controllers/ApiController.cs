@@ -26,11 +26,13 @@ namespace MusicTrackAPI.Controllers
         }
 
         [HttpGet]
-        public virtual async Task<IActionResult> QueryAsync([FromQuery] DataFilters filters, [FromQuery] Paging paging)
+        public virtual async Task<IActionResult> QueryAsync([FromQuery] List<FieldFilter> filters, [FromQuery] Paging paging, CancellationToken ct)
         {
             try
-            { 
-               return Ok();
+            {
+               var result = await dataService.QueryAsync(filters, paging, ct);
+
+               return Ok(result);
             }
             catch (Exception ex)
             {

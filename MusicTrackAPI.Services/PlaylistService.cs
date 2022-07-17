@@ -1,5 +1,6 @@
 ﻿using System;
 using AutoMapper;
+using Microsoft.Extensions.Logging;
 using MusicTrackAPI.Data.Domain;
 using MusicTrackAPI.Data.Repositories;
 using MusicTrackAPI.Data.Repositories.Interfaces;
@@ -12,7 +13,10 @@ namespace MusicTrackAPI.Services
     {
         private readonly IPlaylistRepository playlistRepository;
 
-        public PlaylistService(IPlaylistRepository playlistRepository, IMapper mapper) : base(playlistRepository, mapper)
+        public PlaylistService(
+            IPlaylistRepository playlistRepository,
+            IMapper mapper,
+            ILogger<PlaylistService> logger) : base(playlistRepository, mapper, logger)
         {
             this.playlistRepository = playlistRepository;
         }

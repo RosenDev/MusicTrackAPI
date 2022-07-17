@@ -1,5 +1,6 @@
 ﻿using System;
 using AutoMapper;
+using Microsoft.Extensions.Logging;
 using MusicTrackAPI.Data.Domain;
 using MusicTrackAPI.Data.Repositories;
 using MusicTrackAPI.Data.Repositories.Interfaces;
@@ -12,7 +13,10 @@ namespace MusicTrackAPI.Services
     {
         private readonly IUserRepository userRepository;
 
-        public UserService(IUserRepository userRepository, IMapper mapper) : base(userRepository, mapper)
+        public UserService(
+            IUserRepository userRepository,
+            IMapper mapper,
+            ILogger<UserService> logger) : base(userRepository, mapper, logger)
         {
             this.userRepository = userRepository;
         }
