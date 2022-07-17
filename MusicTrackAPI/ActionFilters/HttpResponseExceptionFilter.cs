@@ -1,7 +1,6 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using MusicTrackAPI.Common.Exceptions;
 
 namespace MusicTrackAPI.ActionFilters
 {
@@ -13,11 +12,13 @@ namespace MusicTrackAPI.ActionFilters
 
         public void OnActionExecuted(ActionExecutedContext context)
         {
-            if (context.Exception is HttpResponseException httpResponseException)
+            if (context.Exception is Exception httpResponseException)
             {
-                context.Result = new ObjectResult(httpResponseException.Value)
+                context.Result = new ObjectResult(httpResponseException)
                 {
-                    StatusCode = httpResponseException.StatusCode
+                    Value = httpResponseException.Message,
+
+                    StatusCode = 500
                 };
 
                 context.ExceptionHandled = true;
