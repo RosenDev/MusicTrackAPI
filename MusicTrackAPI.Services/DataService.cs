@@ -70,10 +70,8 @@ namespace MusicTrackAPI.Services
 
             try
             {
-                filters.ForEach(filter =>
+               foreach(var filter in filters)
                 {
-
-
                     switch (filter.Type)
                     {
                         case FieldValueType.Number:
@@ -104,7 +102,7 @@ namespace MusicTrackAPI.Services
                            
                     }
 
-                });
+                }
 
                 return parsedFilters;
 
