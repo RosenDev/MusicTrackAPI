@@ -39,6 +39,7 @@
     <None Remove="Autofac.Extensions.DependencyInjection" />
     <None Remove="DateOnlyTimeOnly.AspNet.Swashbuckle" />
     <None Remove="DateOnlyTimeOnly.AspNet" />
+    <None Remove="ActionFilters\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MusicTrackAPI.Data\MusicTrackAPI.Data.csproj">
@@ -52,5 +53,8 @@
     <ProjectReference Include="..\MusicTrackAPI.Common\MusicTrackAPI.Common.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ActionFilters\" />
   </ItemGroup>
 </Project>

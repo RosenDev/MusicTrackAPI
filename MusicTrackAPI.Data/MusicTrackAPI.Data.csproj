@@ -27,6 +27,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MusicTrackAPI.Common\MusicTrackAPI.Common.csproj" />
     <ProjectReference Include="..\MusicTrackAPI.Data.Domain\MusicTrackAPI.Data.Domain.csproj" />
   </ItemGroup>
   <ItemGroup>

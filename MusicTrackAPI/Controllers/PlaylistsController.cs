@@ -7,7 +7,8 @@ namespace MusicTrackAPI.Controllers
 {
     public class PlaylistsController : ApiController<Playlist, PlaylistModel>
     {
-        public PlaylistsController(IPlaylistService playlistService) : base(playlistService)
+        public PlaylistsController(IPlaylistService playlistService, ILogger<PlaylistsController> logger)
+            : base(playlistService, logger)
         {
 
         }

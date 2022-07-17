@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
+using MusicTrackAPI.Common;
 using MusicTrackAPI.Data.Domain;
 using MusicTrackAPI.Data.Repositories.Interfaces;
 
@@ -18,7 +19,7 @@ namespace MusicTrackAPI.Data.Repositories
         }
 
         
-        public virtual async Task<bool> DeleteAsync(int id, CancellationToken ct = default)
+        public virtual async Task<bool> DeleteAsync(int id, CancellationToken ct)
         {
             var entity = await Set.FindAsync(id);
 
@@ -31,17 +32,23 @@ namespace MusicTrackAPI.Data.Repositories
 
         }
 
-        public virtual async Task<TEntity> FindAsync(int id, CancellationToken ct = default)
+        public virtual async Task<TEntity> FindAsync(int id, CancellationToken ct)
         {
             return await Set.FindAsync(new object[] { id }, ct);
         }
 
-        public virtual async Task<List<TEntity>> QueryAsync(Expression<Func<TEntity, bool>> query, CancellationToken ct = default)
+        public virtual async Task<List<TEntity>> QueryAsync(List<Expression<Func<TEntity, bool>>> query, Paging paging, CancellationToken ct = default)
         {
-            return await Set.AsQueryable().AsNoTracking().Where(query).ToListAsync(ct);
+
+
+            return await Set.AsQueryable().AsNoTracking()
+                .Where(queryExpression)
+                .Skip(paging.Page)
+                .Take(paging.Size)
+                .ToListAsync(ct);
         }
 
-        public virtual async Task<TEntity> AddAsync(TEntity entity, CancellationToken ct = default)
+        public virtual async Task<TEntity> AddAsync(TEntity entity, CancellationToken ct)
         {
             Set.Add(entity);
 
@@ -50,7 +57,7 @@ namespace MusicTrackAPI.Data.Repositories
             return entity;
         }
 
-        public virtual async Task<TEntity> UpdateAsync(TEntity entity, CancellationToken ct = default)
+        public virtual async Task<TEntity> UpdateAsync(TEntity entity, CancellationToken ct)
         {
             Set.Update(entity);
 

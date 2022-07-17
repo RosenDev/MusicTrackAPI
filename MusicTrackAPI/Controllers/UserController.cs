@@ -12,7 +12,11 @@ namespace MusicTrackAPI.Controllers
         private readonly IAuthenticationService authenticationService;
         private readonly IUserService userService;
 
-        public UserController(IAuthenticationService authenticationService, IUserService userService) : base(userService)
+        public UserController(
+            IAuthenticationService authenticationService,
+            IUserService userService,
+            ILogger<UserController> logger
+            ) : base(userService, logger)
         {
             this.authenticationService = authenticationService;
             this.userService = userService;

@@ -7,7 +7,7 @@ namespace MusicTrackAPI.Controllers
 {
     public class TracksController : ApiController<Track, TrackModel>
     {
-        public TracksController(ITrackService trackService) : base(trackService)
+        public TracksController(ITrackService trackService, ILogger<TracksController> logger) : base(trackService, logger)
         {
 
         }

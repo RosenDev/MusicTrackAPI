@@ -1,5 +1,6 @@
 ﻿    using System;
-    using MusicTrackAPI.Data.Domain.Interface;
+using MusicTrackAPI.Common;
+using MusicTrackAPI.Data.Domain.Interface;
 using MusicTrackAPI.Model.Interface;
 
 namespace MusicTrackAPI.Services.Interface
@@ -13,6 +14,8 @@ namespace MusicTrackAPI.Services.Interface
              Task<int> UpdateAsync(TApiEntity apiModel, CancellationToken ct);
 
              Task<TApiEntity> GetByIdAsync(int id, CancellationToken ct);
+
+             Task<TApiEntity> QueryAsync(Paging paging, CancellationToken ct);
 
              Task<bool> DeleteAsync(int id, CancellationToken ct);
         }

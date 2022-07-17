@@ -1,5 +1,7 @@
-﻿namespace MusicTrackAPI.Common;
-public class PagedResponse<TResult> where TResult: class, new()
+﻿using MusicTrackAPI.Model.Interface;
+
+namespace MusicTrackAPI.Common;
+public class PagedResponse<TResult> where TResult: IApiEntity<int>
 {
     public TResult Result { get; set; }
 

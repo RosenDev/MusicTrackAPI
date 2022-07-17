@@ -7,7 +7,7 @@ namespace MusicTrackAPI.Controllers
 {
     public class AlbumsController : ApiController<Album, AlbumModel>
     {
-        public AlbumsController(IAlbumService albumService) : base(albumService)
+        public AlbumsController(IAlbumService albumService, ILogger<AlbumsController> logger) : base(albumService, logger)
         {
 
         }

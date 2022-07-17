@@ -1,11 +1,14 @@
 ﻿using Autofac;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
+using MusicTrackAPI.ActionFilters;
 using MusicTrackAPI.Data;
 using System.Text;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace MusicTrackAPI
 {
@@ -50,7 +53,10 @@ namespace MusicTrackAPI
             });
 
 
-            services.AddControllers(options => options.UseDateOnlyTimeOnlyStringConverters())
+            services.AddControllers(options => {
+                options.UseDateOnlyTimeOnlyStringConverters();
+                options.Filters.Add<HttpResponseExceptionFilter>();
+            })
                 .AddJsonOptions(options => options.UseDateOnlyTimeOnlyStringConverters());
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen(opt =>
