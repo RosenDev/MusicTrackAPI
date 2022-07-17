@@ -39,7 +39,9 @@ namespace MusicTrackAPI.Data.Repositories
 
         public virtual async Task<List<TEntity>> QueryAsync(List<Expression<Func<TEntity, bool>>> query, Paging paging, CancellationToken ct = default)
         {
+            Expression<Func<TEntity, bool>> queryExpression = x => true;
 
+            query.ForEach(x => { queryExpression = Expression.And(queryExpression, x); });
 
             return await Set.AsQueryable().AsNoTracking()
                 .Where(queryExpression)
