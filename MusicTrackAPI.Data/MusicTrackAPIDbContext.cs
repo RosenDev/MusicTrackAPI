@@ -65,6 +65,7 @@
                 var entity = (IEntity<int>)entry.Entity;
                 if (entry.State == EntityState.Modified && entity.UpdatedAt == null)
                 {
+                    //entry.OriginalValues.
                     entity.UpdatedAt = DateTime.UtcNow;
                 } else if(entry.State == EntityState.Deleted && entity.DeletedAt == null) {
                     entity.DeletedAt = DateTime.UtcNow;

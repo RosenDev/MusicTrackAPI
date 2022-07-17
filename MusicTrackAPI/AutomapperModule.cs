@@ -18,6 +18,8 @@ namespace MusicTrackAPI
                 CreateMap<Album, AlbumModel>(cfg);
                 CreateMap<Playlist, PlaylistModel>(cfg);
 
+                cfg.CreateMap<Playlist, PlaylistModel>()
+                .ForMember(x => x.AlbumName, opts => opts.MapFrom(x => x.Album.Name));
 
                 cfg.CreateMap<UserRegisterModel, User>()
                 .ForMember(x => x.Salt, opt => opt.Ignore())

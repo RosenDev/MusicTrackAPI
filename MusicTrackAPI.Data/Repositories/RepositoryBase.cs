@@ -34,7 +34,7 @@ namespace MusicTrackAPI.Data.Repositories
 
         public virtual async Task<TEntity> FindAsync(int id, CancellationToken ct)
         {
-            return await Set.FindAsync(new object[] { id }, ct);
+            return await ApplyInclude(Set).FirstOrDefaultAsync(x => x.Id == id, ct);
         }
 
         public virtual async Task<List<TEntity>> QueryAsync(List<Expression<Func<TEntity, bool>>> query, Paging paging, CancellationToken ct)
@@ -46,7 +46,7 @@ namespace MusicTrackAPI.Data.Repositories
 
             var lambdaExpression = Expression.Lambda<Func<TEntity, bool>>(queryExpression, new ParameterExpression[] { Expression.Parameter(typeof(TEntity)) });
 
-            return await Set.AsQueryable().AsNoTracking()
+            return await ApplyInclude(Set.AsQueryable()).AsNoTracking()
                 .Where(x=> lambdaExpression.Compile()(x))
                 .Skip(paging.Page - 1)
                 .Take(paging.Size)
@@ -70,6 +70,11 @@ namespace MusicTrackAPI.Data.Repositories
 
             return entity;
         }
+
+      protected virtual IQueryable<TEntity> ApplyInclude(IQueryable<TEntity> query)
+      {
+          return query;
+      }
     }
 }
 
