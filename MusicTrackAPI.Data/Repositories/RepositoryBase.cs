@@ -44,8 +44,7 @@ namespace MusicTrackAPI.Data.Repositories
 
             query.ForEach(x => { queryExpression = Expression.AndAlso(queryExpression, x.Body); });
 
-            var lambdaExpression = Expression.Lambda<Func<TEntity, bool>>(queryExpression, new ParameterExpression[] { Expression.Parameter(typeof(TEntity)) })
-                .Compile();
+            var lambdaExpression = Expression.Lambda<Func<TEntity, bool>>(queryExpression, new ParameterExpression[] { Expression.Parameter(typeof(TEntity)) });
 
             return await ApplyInclude(Set.AsQueryable()).AsNoTracking()
                 .Where(lambdaExpression)
