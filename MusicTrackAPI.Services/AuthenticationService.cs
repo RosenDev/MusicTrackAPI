@@ -42,7 +42,7 @@ namespace MusicTrackAPI.Services
             {
 				logger.LogWarning(ErrorMessages.UserDoesNotExist);
 
-				throw new ArgumentNullException(userLoginModel.Username, ErrorMessages.UserDoesNotExist);
+				throw new ArgumentException(ErrorMessages.UserDoesNotExist);
             }
 
 			if(!PBKDF2HashGenerator.VerifyHash(userLoginModel.Password, userEntity.Password, userEntity.Salt))

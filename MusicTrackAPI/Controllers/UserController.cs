@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Text.RegularExpressions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MusicTrackAPI.Common;
 using MusicTrackAPI.Data.Domain;
@@ -26,18 +27,46 @@ namespace MusicTrackAPI.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> LoginAsync([FromBody] UserLoginModel userLoginModel, CancellationToken ct)
         {
-            var tokens = await authenticationService.AuthenticateAsync(userLoginModel, ct);
- 
-            return Ok(tokens);
+            try
+            {
+                var tokens = await authenticationService.AuthenticateAsync(userLoginModel, ct);
+
+                return Ok(tokens);
+
+            }
+            catch (Exception ex)
+            {
+                if(ex is ArgumentException argEx)
+                {
+                    return BadRequest(argEx.Message);
+                }
+
+                throw;
+            }
+  
         }
 
         [AllowAnonymous]
         [HttpPost("register")]
         public async Task<IActionResult> RegisterAsync([FromBody] UserRegisterModel user, CancellationToken ct)
         {
-            var tokens = await authenticationService.RegisterUserAsync(user, ct);
+            try
+            {
 
-            return Ok(tokens);
+                var tokens = await authenticationService.RegisterUserAsync(user, ct);
+
+                return Ok(tokens);
+
+            }
+            catch (Exception ex)
+            {
+                if(ex is ArgumentException argEx)
+                {
+                    return BadRequest(argEx.Message);
+                }
+
+                throw;
+            }
         }
 
         public override Task<IActionResult> Create([FromBody] UserModel apiModel, CancellationToken ct)
