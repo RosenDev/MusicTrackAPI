@@ -25,8 +25,8 @@ namespace MusicTrackAPI.Controllers
             this.logger = logger;
         }
 
-        [HttpGet]
-        public virtual async Task<IActionResult> QueryAsync([FromQuery] List<FieldFilter> filters, [FromQuery] Paging paging, CancellationToken ct)
+        [HttpPost("search")]
+        public virtual async Task<IActionResult> QueryAsync([FromBody] List<FieldFilter> filters, [FromQuery] Paging paging, CancellationToken ct)
         {
             try
             {
