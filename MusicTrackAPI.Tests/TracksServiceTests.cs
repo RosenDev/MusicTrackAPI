@@ -1,4 +1,8 @@
-﻿using Moq;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Moq;
+using MusicTrackAPI.Common;
 using MusicTrackAPI.Model;
 using MusicTrackAPI.Services.Interface;
 using Xunit;
@@ -11,17 +15,22 @@ public class TracksServiceTests
     public void TrackService_QueryAsync_WhenThereIsData_ShouldReturnTracks()
     {
         var trackServiceMock = new Mock<ITrackService>();
-        var testData = new UserModel
+        var testTrack = new TrackModel
         {
-            Username = "Test User",
-            Email = "test@user.com",
+            Name = "Test track",
+            ArrangedBy = "Test User",
+            PerformedBy = "Another Test User",
+            WrittenBy = "Test",
+            Type = TrackType.FilmMusic,
+            Duration = TimeSpan.Zero
         };
-        trackServiceMock.Setup(x => x.)
-            .ReturnsAsync(() => testData);
+        var testData = new List<TrackModel> { testTrack };
+        trackServiceMock.Setup(x => x.QueryAsync(It.IsAny<List<FieldFilter>>(), It.IsAny<Paging>(), default))
+            .ReturnsAsync(() => new PagedResponse<TrackModel> { Result = testData });
 
         var trackService = trackServiceMock.Object;
 
-        Assert.Equal(testData.Email, (await trackService.GetUserAsync(testData.Username, default)).Email);
+        Assert.Equal(testData[0].Name, (await trackService.QueryAsync(new List<FieldFilter>(), new Paging(), default)).Result[0].Name);
     }
 
     [Fact]
