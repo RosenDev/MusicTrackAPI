@@ -9,7 +9,7 @@ public class Track: MySqlEntity
     public TimeSpan Duration { get; set; }
     public TrackType Type { get; set; }
 
-    public int AlbumId { get; set; }
+    public int? AlbumId { get; set; }
     public Album Album { get; set; }
 
     public ICollection<TracksPlaylists> TracksPlaylists { get; set; }

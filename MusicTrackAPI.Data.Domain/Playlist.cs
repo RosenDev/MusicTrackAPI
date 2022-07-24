@@ -8,7 +8,7 @@ public class Playlist : MySqlEntity
 
     public bool IsPublic { get; set; }
 
-    public int AlbumId { get; set; }
+    public int? AlbumId { get; set; }
     public Album Album { get; set; }
 
     public ICollection<TracksPlaylists> TracksPlaylists { get; set; }
