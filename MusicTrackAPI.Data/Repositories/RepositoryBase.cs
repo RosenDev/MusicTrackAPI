@@ -68,7 +68,6 @@ namespace MusicTrackAPI.Data.Repositories
             var existingEnitity = await Set.FirstOrDefaultAsync(x => x.Id == entity.Id, ct);
 
             entity.CreatedAt = existingEnitity.CreatedAt;
-            entity.UpdatedAt = existingEnitity.UpdatedAt;
 
             Set.Update(entity);
             

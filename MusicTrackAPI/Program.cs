@@ -18,8 +18,10 @@ public class Program
             })
             .Build();
 
-      
-            var dbContext = host.Services.GetRequiredService<MusicTrackAPIDbContext>();
+
+            using var scope = host.Services.CreateScope();
+
+            var dbContext = scope.ServiceProvider.GetRequiredService<MusicTrackAPIDbContext>();
 
             var pendingMigrations = await dbContext.Database.GetPendingMigrationsAsync();
 

@@ -2,13 +2,14 @@
 
 public class Playlist : MySqlEntity
 {   
-    public int TrackPosition { get; set; }
     public string Name { get; set; }
-    public string TrackName { get; set; }
+
+    public TimeSpan Duration { get; set; }
+
+    public bool IsPublic { get; set; }
 
     public int AlbumId { get; set; }
     public Album Album { get; set; }
 
-    public TimeSpan Duration { get; set; }
-    public bool IsPublic { get; set; }
+    public ICollection<TracksPlaylists> TracksPlaylists { get; set; }
 }
