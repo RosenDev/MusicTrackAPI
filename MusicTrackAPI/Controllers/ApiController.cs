@@ -58,36 +58,6 @@ namespace MusicTrackAPI.Controllers
             }
         }
 
-        [HttpPost]        
-        public virtual async Task<IActionResult> Create([FromBody] TApiEntity apiModel, CancellationToken ct)
-        {
-            try
-            { 
-               return Ok(await dataService.CreateAsync(apiModel, ct));
-            }
-            catch (Exception ex)
-            {
-                logger.LogWarning(ex.Message);
-
-                throw;
-            }
-        }
-
-        [HttpPut]
-        public virtual async Task<IActionResult> Update([FromBody] TApiEntity apiModel, CancellationToken ct)
-        {
-            try
-            {
-
-                return Ok(await dataService.UpdateAsync(apiModel, ct));
-            }
-            catch (Exception ex)
-            {
-                logger.LogWarning(ex.Message);
-
-                throw;
-            }
-        }
 
         [HttpDelete("{id}")]
         public virtual async Task<IActionResult> Delete([FromRoute] int id, CancellationToken ct)

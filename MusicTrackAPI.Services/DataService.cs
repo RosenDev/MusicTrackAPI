@@ -30,16 +30,6 @@ namespace MusicTrackAPI.Services
             this.logger = logger;
         }
 
-        public virtual async Task<int> CreateAsync(TApiEntity apiModel, CancellationToken ct)
-        {
-            return (await repositoryBase.AddAsync(mapper.Map<TEntity>(apiModel), ct)).Id;
-        }
-
-        public virtual async Task<int> UpdateAsync(TApiEntity apiModel, CancellationToken ct)
-        {
-            return (await repositoryBase.UpdateAsync(mapper.Map<TEntity>(apiModel), ct)).Id;
-        }
-
         public virtual async Task<TApiEntity> GetByIdAsync(int id, CancellationToken ct)
         {
             return mapper.Map<TApiEntity>(await repositoryBase.FindAsync(id, ct));

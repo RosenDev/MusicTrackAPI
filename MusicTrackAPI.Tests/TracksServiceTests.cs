@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Moq;
 using MusicTrackAPI.Common;
 using MusicTrackAPI.Model;
+using MusicTrackAPI.Model.Track;
 using MusicTrackAPI.Services.Interface;
 using Xunit;
 
@@ -12,7 +13,7 @@ namespace MusicTrackAPI.Tests;
 public class TracksServiceTests
 {
     [Fact]
-    public async Task TrackService_QueryAsync_WhenThereIsData_ShouldReturnTracks()
+    public async Task TrackService_QueryAsync_ShouldReturnTracks_WhenThereIsData()
     {
         var trackServiceMock = new Mock<ITrackService>();
         var testTrack = new TrackModel
@@ -34,7 +35,7 @@ public class TracksServiceTests
     }
 
     [Fact]
-    public async Task TrackService_QueryAsync_WhenThereIsNoData_ShouldReturnNoTracks()
+    public async Task TrackService_QueryAsync_ShouldReturnNoTracks_WhenThereIsNoData()
     {
         var trackServiceMock = new Mock<ITrackService>();
         var testTrack = new TrackModel
@@ -57,7 +58,7 @@ public class TracksServiceTests
 
 
     [Fact]
-    public async Task TrackService_GetByIdAsync_ShouldReturnTrack_WhenThereIsSuch()
+    public async Task TrackService_GetByIdAsync_ShouldNotReturnNull_WhenTrackExists()
     {
         var trackServiceMock = new Mock<ITrackService>();
         var testTrack = new TrackModel
@@ -71,16 +72,16 @@ public class TracksServiceTests
             Duration = TimeSpan.Zero
         };
 
-        trackServiceMock.Setup(x => x.GetByIdAsync(It.Is<int>(x => x == 7), default))
+        trackServiceMock.Setup(x => x.GetByIdAsync(It.Is<int>(x => x == testTrack.Id), default))
             .ReturnsAsync(() => testTrack);
 
         var trackService = trackServiceMock.Object;
 
-        Assert.NotNull(await trackService.GetByIdAsync(7, default));
+        Assert.NotNull(await trackService.GetByIdAsync(testTrack.Id, default));
     }
 
     [Fact]
-    public async Task TrackService_GetByIdAsync_ShouldReturnNull_WhenThereIsNotTtack()
+    public async Task TrackService_GetByIdAsync_ShouldReturnNull_WhenTrackDoesNotExists()
     {
         var trackServiceMock = new Mock<ITrackService>();
  
@@ -90,5 +91,77 @@ public class TracksServiceTests
         var trackService = trackServiceMock.Object;
 
         Assert.Null(await trackService.GetByIdAsync(7, default));
+    }
+
+    [Fact]
+    public async Task TrackService_UpdateTrackAsync_ShouldReturnTrackId_WhenTrackExists()
+    {
+        var trackServiceMock = new Mock<ITrackService>();
+        var testTrack = new TrackModel
+        {
+            Id = 7,
+            Name = "Test track",
+            ArrangedBy = "Test User",
+            PerformedBy = "Another Test User",
+            WrittenBy = "Test",
+            Type = TrackType.LivePerformance,
+            Duration = TimeSpan.Zero
+        };
+
+        trackServiceMock.Setup(x => x.GetByIdAsync(It.Is<int>(x => x == testTrack.Id), default))
+            .ReturnsAsync(() => testTrack);
+
+        var trackService = trackServiceMock.Object;
+
+        Assert.NotNull(await trackService.GetByIdAsync(7, default));
+    }
+
+    [Fact]
+    public async Task TrackService_UpdateTrackAsync_ShouldThrowException_WhenTrackDoesNotExists()
+    {
+        var trackServiceMock = new Mock<ITrackService>();
+
+        trackServiceMock.Setup(x => x.UpdateTrackAsync(It.IsAny<TrackUpdateModel>(), default))
+            .ThrowsAsync(new ArgumentException("Track does not exist"));
+
+        var trackService = trackServiceMock.Object;
+
+        await Assert.ThrowsAsync<ArgumentException>(() => trackService.UpdateTrackAsync(new TrackUpdateModel(), default));
+    }
+
+    [Fact]
+    public async Task TrackService_DeleteAsync_ShouldReturnTrue_WhenTrackExists()
+    {
+        var trackServiceMock = new Mock<ITrackService>();
+        var testTrack = new TrackModel
+        {
+            Id = 7,
+            Name = "Test track",
+            ArrangedBy = "Test User",
+            PerformedBy = "Another Test User",
+            WrittenBy = "Test",
+            Type = TrackType.LivePerformance,
+            Duration = TimeSpan.Zero
+        };
+
+        trackServiceMock.Setup(x => x.DeleteAsync(It.Is<int>(x => x == testTrack.Id), default))
+            .ReturnsAsync(() => true);
+
+        var trackService = trackServiceMock.Object;
+
+        Assert.True(await trackService.DeleteAsync(testTrack.Id, default));
+    }
+
+    [Fact]
+    public async Task TrackService_DeleteAsync_ShouldReturnFalse_WhenTrackDoesNotExists()
+    {
+        var trackServiceMock = new Mock<ITrackService>();
+
+        trackServiceMock.Setup(x => x.DeleteAsync(It.IsAny<int>(), default))
+            .ReturnsAsync(() => false);
+
+        var trackService = trackServiceMock.Object;
+
+        Assert.False(await trackService.DeleteAsync(7, default));
     }
 }

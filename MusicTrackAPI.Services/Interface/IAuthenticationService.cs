@@ -1,5 +1,6 @@
 ﻿using System;
 using MusicTrackAPI.Model;
+using MusicTrackAPI.Model.User;
 
 namespace MusicTrackAPI.Services.Interface
 {

@@ -11,5 +11,16 @@ public class Playlist : MySqlEntity
     public int? AlbumId { get; set; }
     public Album Album { get; set; }
 
-    public ICollection<TracksPlaylists> TracksPlaylists { get; set; }
+    public ICollection<TrackPlaylist> TracksPlaylists { get; set; }
+
+    public void AddTracks(List<int> trackIds)
+    {
+        trackIds.ForEach(x =>
+        {
+            TracksPlaylists.Add(new TrackPlaylist
+            {
+                TrackId = x
+            });
+        });
+    }
 }

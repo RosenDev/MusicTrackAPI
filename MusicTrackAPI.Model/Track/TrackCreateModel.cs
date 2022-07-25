@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MusicTrackAPI.Model
+﻿namespace MusicTrackAPI.Model.Track
 {
-    public class TrackModel: ApiEntity
+    public class TrackCreateModel
     {
         public string Name { get; set; }
         public string WrittenBy { get; set; }

@@ -8,6 +8,9 @@ namespace MusicTrackAPI.Common
         public const string UserAlreadyExist = "This user already exists!";
         public const string InvalidPassword = "Incorrect password!";
         public const string PlaylistPlayTimeExceedsTwoHours = "The total duration of the tracks in this playlist cannot exceed 2 hours.";
+        public const string AlbumNotFound = "Album {id} does not exists.";
+        public const string TrackNotFound = "Track {id} does not exists.";
+        public const string PlaylistNotFound = "Playlist {id} does not exists.";
     }
 }
 

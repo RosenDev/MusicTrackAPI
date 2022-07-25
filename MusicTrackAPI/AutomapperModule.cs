@@ -2,6 +2,9 @@
 using AutoMapper;
 using MusicTrackAPI.Data.Domain;
 using MusicTrackAPI.Model;
+using MusicTrackAPI.Model.Album;
+using MusicTrackAPI.Model.Track;
+using MusicTrackAPI.Model.User;
 
 namespace MusicTrackAPI
 {
@@ -18,8 +21,7 @@ namespace MusicTrackAPI
                 CreateMap<Album, AlbumModel>(cfg);
                 CreateMap<Playlist, PlaylistModel>(cfg);
 
-                cfg.CreateMap<Playlist, PlaylistModel>()
-                .ForMember(x => x.AlbumName, opts => opts.MapFrom(x => x.Album.Name));
+                cfg.CreateMap<Playlist, PlaylistModel>();
 
                 cfg.CreateMap<UserRegisterModel, User>()
                 .ForMember(x => x.Salt, opt => opt.Ignore())

@@ -1,5 +1,7 @@
 ﻿using System;
-namespace MusicTrackAPI.Model
+using MusicTrackAPI.Model.Track;
+
+namespace MusicTrackAPI.Model.Album
 {
     public class AlbumModel: ApiEntity
     {

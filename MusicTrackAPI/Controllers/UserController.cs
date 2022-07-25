@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using MusicTrackAPI.Common;
 using MusicTrackAPI.Data.Domain;
 using MusicTrackAPI.Model;
+using MusicTrackAPI.Model.User;
 using MusicTrackAPI.Services.Interface;
 
 namespace MusicTrackAPI.Controllers
@@ -67,11 +68,6 @@ namespace MusicTrackAPI.Controllers
 
                 throw;
             }
-        }
-
-        public override Task<IActionResult> Create([FromBody] UserModel apiModel, CancellationToken ct)
-        {
-            return Task.FromResult((IActionResult)Forbid(ErrorMessages.UseRegisterEnpoint));
         }
 
         [HttpGet("getcurrentuser")]

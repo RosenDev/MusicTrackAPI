@@ -9,11 +9,16 @@
   <ItemGroup>
     <None Remove="Interface\" />
     <None Remove="Swashbuckle.AspNetCore.Swagger" />
+    <None Remove="Playlist\" />
+    <None Remove="Track\" />
+    <None Remove="Album\" />
+    <None Remove="User\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interface\" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.3.2" />
+    <Folder Include="Playlist\" />
+    <Folder Include="Track\" />
+    <Folder Include="Album\" />
+    <Folder Include="User\" />
   </ItemGroup>
 </Project>

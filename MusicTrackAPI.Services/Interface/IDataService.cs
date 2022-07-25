@@ -9,10 +9,6 @@ namespace MusicTrackAPI.Services.Interface
         where TEntity: IEntity<int>
         where TApiEntity: IApiEntity<int>
 	    {
-             Task<int> CreateAsync(TApiEntity apiModel, CancellationToken ct);
-
-             Task<int> UpdateAsync(TApiEntity apiModel, CancellationToken ct);
-
              Task<TApiEntity> GetByIdAsync(int id, CancellationToken ct);
 
              Task<PagedResponse<TApiEntity>> QueryAsync(List<FieldFilter> filters, Paging paging, CancellationToken ct);
