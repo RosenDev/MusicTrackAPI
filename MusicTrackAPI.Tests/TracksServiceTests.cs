@@ -108,7 +108,7 @@ public class TracksServiceTests
             Duration = TimeSpan.Zero
         };
 
-        trackServiceMock.Setup(x => x.GetByIdAsync(It.Is<int>(x => x == testTrack.Id), default))
+        trackServiceMock.Setup(x => x.UpdateTrackAsync(It.Is<int>(x => x == testTrack.Id), default))
             .ReturnsAsync(() => testTrack);
 
         var trackService = trackServiceMock.Object;
