@@ -66,25 +66,19 @@ namespace MusicTrackAPI.Services
                     {
                         case FieldValueType.Number:
 
-                            Expression<Func<TEntity, bool>> intExpr = x => (int)x.GetType().GetProperties().First(x=>x.Name.ToLower() == filter.Field).GetValue(x) == int.Parse(filter.Value);
-
-                            parsedFilters.Add(intExpr);
+                            parsedFilters.Add(BuildExpression<int>(filter.Field, int.Parse(filter.Value)));
 
                             break;
 
                         case FieldValueType.Text:
 
-                            Expression<Func<TEntity, bool>> stringExpr = x => (string)x.GetType().GetProperties().First(x => x.Name.ToLower() == filter.Field).GetValue(x) == filter.Value;
-
-                            parsedFilters.Add(stringExpr);
+                            parsedFilters.Add(BuildExpression<string>(filter.Field, filter.Value));
 
                             break;
 
                         case FieldValueType.TrackType:
 
-                            Expression<Func<TEntity, bool>> trackTypeExpr = x => (TrackType)x.GetType().GetProperties().First(x => x.Name.ToLower() == filter.Field).GetValue(x) == Enum.Parse<TrackType>(filter.Value);
-
-                            parsedFilters.Add(trackTypeExpr);
+                            parsedFilters.Add(BuildExpression<TrackType>(filter.Field, Enum.Parse<TrackType>(filter.Value)));
 
                             break;
                         default:
@@ -104,6 +98,23 @@ namespace MusicTrackAPI.Services
                 throw;
             }
         }
+
+
+        private Expression<Func<TEntity, bool>> BuildExpression<T>(string propertyName, T value)
+        {
+            ParameterExpression parameter = Expression.Parameter(typeof(TEntity), "entity");
+
+            MemberExpression property = Expression.Property(parameter, propertyName);
+
+            var equalsTo = Expression.Constant(value);
+
+            var equality = Expression.Equal(property, equalsTo);
+
+            Expression<Func<TEntity, bool>> retVal =
+                Expression.Lambda<Func<TEntity, bool>>(equality, new[] { parameter });
+
+            return retVal;
+        }   
     }
 }
 

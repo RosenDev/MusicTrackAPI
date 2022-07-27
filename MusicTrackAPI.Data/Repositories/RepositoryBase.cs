@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using System.Linq;
+using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using MusicTrackAPI.Common;
 using MusicTrackAPI.Data.Domain;
@@ -39,18 +40,23 @@ namespace MusicTrackAPI.Data.Repositories
 
         public virtual async Task<List<TEntity>> QueryAsync(List<Expression<Func<TEntity, bool>>> query, Paging paging, CancellationToken ct)
         {
-            Expression<Func<TEntity, bool>> fakeExpression = x => true;
-            var queryExpression = Expression.AndAlso(fakeExpression.Body, fakeExpression.Body);
+            Expression<Func<TEntity, bool>> fake = x => false;
 
-            query.ForEach(x => { queryExpression = Expression.AndAlso(queryExpression, x.Body); });
+            var binaryExpression = Expression.OrElse(fake , fake);
 
-            var lambdaExpression = Expression.Lambda<Func<TEntity, bool>>(queryExpression, new ParameterExpression[] { Expression.Parameter(typeof(TEntity)) });
+            var param = Expression.Parameter(typeof(TEntity), "entity");
 
-            return await ApplyInclude(Set.AsQueryable()).AsNoTracking()
-                .Where(lambdaExpression)
+            query.ForEach(x => binaryExpression = Expression.OrElse(binaryExpression, Expression.Invoke(x, param)));
+
+            var lambda = Expression.Lambda<Func<TEntity, bool>>(binaryExpression, param);
+
+
+            var result = await ApplyInclude(Set.Where(lambda)).AsNoTracking()
                 .Skip(paging.Page - 1)
                 .Take(paging.Size)
                 .ToListAsync(ct);
+
+            return result;
         }
 
         public virtual async Task<TEntity> AddAsync(TEntity entity, CancellationToken ct)

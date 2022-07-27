@@ -5,14 +5,16 @@ using MusicTrackAPI.Data.Domain;
 
 namespace MusicTrackAPI.Data.ValueGenerators
 {
-    public static class TrackPositionValueGenerator
+    public class TrackPositionValueGenerator: ValueGenerator<int>
     {
-        private static int CurrentValue { get; set; } = 1;
+        private int CurrentValue { get; set; } = 1;
 
-         public static int Next()
-         {
+        public override bool GeneratesTemporaryValues => false;
+
+        public override int Next(EntityEntry entry)
+        {
             return CurrentValue++;
-         }       
+        }
     }
 }
 
