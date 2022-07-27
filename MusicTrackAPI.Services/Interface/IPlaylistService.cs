@@ -13,6 +13,10 @@ namespace MusicTrackAPI.Services.Interface
         Task<int> UpdatePlaylistAsync(PlaylistUpdateModel apiModel, CancellationToken ct);
 
         Task<int> InsertTrackAsync(int playlistId, int position, int trackId, CancellationToken ct);
+
+        Task<int> AddTrackAsync(int trackId, int playlistId, CancellationToken ct);
+
+        Task<int> RemoveTrackAsync(int trackId, int playlistId, CancellationToken ct);
     }
 }
 

@@ -18,7 +18,7 @@ namespace MusicTrackAPI.Controllers
             this.albumService = albumService;
         }
 
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> CreateAlbumAsync([FromBody] AlbumCreateModel createAlbumModel, CancellationToken ct)
         {
             return Ok(await albumService.CreateAlbumAsync(createAlbumModel, ct));

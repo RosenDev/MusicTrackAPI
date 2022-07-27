@@ -11,6 +11,8 @@ namespace MusicTrackAPI.Common
         public const string AlbumNotFound = "Album {id} does not exists.";
         public const string TrackNotFound = "Track {id} does not exists.";
         public const string PlaylistNotFound = "Playlist {id} does not exists.";
+        public const string InvalidPosition = "The provided position is invalid! If you wish to add track istead of replacing one please use the AddTrack endpoint.";
+        public const string PlaylistContainsNoTracks = "The playlist should contain at least 1 track.";
     }
 }
 

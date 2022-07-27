@@ -18,7 +18,7 @@ namespace MusicTrackAPI.Controllers
             this.playlistService = playlistService;
         }
 
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> CreatePlaylistAsync([FromBody] PlaylistCreateModel createPlaylistModel, CancellationToken ct)
         {
             return Ok(await playlistService.CreatePlaylistAsync(createPlaylistModel, ct));
@@ -31,7 +31,7 @@ namespace MusicTrackAPI.Controllers
         }
 
         [HttpPost("insert-track")]
-        public async Task<IActionResult> InsertTrackInPlaylistAsync([FromBody] TrackInPlaylistModel updatePlaylistModel, CancellationToken ct)
+        public async Task<IActionResult> InsertTrackInPlaylistAsync([FromBody] InsertTrackInPlaylistModel updatePlaylistModel, CancellationToken ct)
         {
             return Ok(await playlistService.InsertTrackAsync(updatePlaylistModel.PlaylistId, updatePlaylistModel.TrackPosition, updatePlaylistModel.TrackId, ct));
         }

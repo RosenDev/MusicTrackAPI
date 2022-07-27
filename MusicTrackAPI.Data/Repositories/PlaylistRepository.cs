@@ -12,7 +12,9 @@ namespace MusicTrackAPI.Data.Repositories
 
         protected override IQueryable<Playlist> ApplyInclude(IQueryable<Playlist> query)
         {
-            return query.Include(x => x.Album);
+            return query.Include(x => x.Album)
+                .Include(x => x.TracksPlaylists)
+                .ThenInclude(x => x.Track);
         }
     }
 }

@@ -55,6 +55,8 @@ namespace MusicTrackAPI.Data.Repositories
 
         public virtual async Task<TEntity> AddAsync(TEntity entity, CancellationToken ct)
         {
+            entity.CreatedAt = DateTime.UtcNow;
+
             Set.Add(entity);
 
             await Context.SaveChangesAsync(ct);

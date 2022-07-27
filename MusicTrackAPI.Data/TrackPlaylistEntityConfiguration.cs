@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MusicTrackAPI.Data.Domain;
+using MusicTrackAPI.Data.ValueGenerators;
 
 namespace MusicTrackAPI.Data
 {
@@ -9,11 +10,9 @@ namespace MusicTrackAPI.Data
 
         public override void Configure(EntityTypeBuilder<TrackPlaylist> builder)
         {
-            builder.HasIndex(x => x.TrackPosition)
-                .IsUnique();
-
             builder.Property(x => x.TrackPosition)
-                .ValueGeneratedOnAdd();
+                .HasValueGenerator(typeof(TrackPositionValueGenerator))
+                .ValueGeneratedOnAdd();    
         }
     }
 }

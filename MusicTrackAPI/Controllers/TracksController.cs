@@ -18,7 +18,7 @@ namespace MusicTrackAPI.Controllers
             this.trackService = trackService;
         }
 
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> CreateTrackAsync([FromBody] TrackCreateModel createTrackModel, CancellationToken ct)
         {
             return Ok(await trackService.CreateTrackAsync(createTrackModel, ct));

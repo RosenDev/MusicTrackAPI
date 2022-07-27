@@ -6,11 +6,10 @@ namespace MusicTrackAPI.Model
 {
     public class PlaylistModel: ApiEntity
     {
-        public int TrackPosition { get; set; }
         public string Name { get; set; }
         public TimeSpan Duration { get; set; }
         public bool IsPublic { get; set; }
-        public List<TrackInPlaylistModel> Tracks { get; set; }
+        public List<TrackInPlaylistModel> Tracks { get; set; } = new List<TrackInPlaylistModel>();
         public AlbumModel Album { get; set; }
     }
 }

@@ -8,7 +8,13 @@ namespace MusicTrackAPI.Data.Repositories
 	{
         public AlbumRepository(MusicTrackAPIDbContext context) : base(context)
         {
-        } 
+        }
+
+        protected override IQueryable<Album> ApplyInclude(IQueryable<Album> query)
+        {
+            return query.Include(x => x.Playlists)
+                .Include(x => x.Tracks);
+        }
     }
 }
 

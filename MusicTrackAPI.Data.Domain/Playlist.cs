@@ -1,4 +1,6 @@
-﻿namespace MusicTrackAPI.Data.Domain;
+﻿using MusicTrackAPI.Common;
+
+namespace MusicTrackAPI.Data.Domain;
 
 public class Playlist : MySqlEntity
 {   
@@ -11,7 +13,7 @@ public class Playlist : MySqlEntity
     public int? AlbumId { get; set; }
     public Album Album { get; set; }
 
-    public ICollection<TrackPlaylist> TracksPlaylists { get; set; }
+    public ICollection<TrackPlaylist> TracksPlaylists { get; set; } = new List<TrackPlaylist>();
 
     public void AddTracks(List<int> trackIds)
     {
@@ -19,8 +21,22 @@ public class Playlist : MySqlEntity
         {
             TracksPlaylists.Add(new TrackPlaylist
             {
-                TrackId = x
+                TrackId = x,
+                PlaylistId = Id
             });
         });
+    }
+
+
+    public void RemoveTrack(int trackId)
+    {
+        var trackToRemove = TracksPlaylists.FirstOrDefault(x => x.TrackId == trackId);
+
+        if(trackToRemove == null)
+        {
+            throw new ArgumentNullException(ErrorMessages.TrackNotFound);
+        }
+
+        TracksPlaylists.Remove(trackToRemove);
     }
 }

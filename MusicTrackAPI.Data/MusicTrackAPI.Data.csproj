@@ -13,6 +13,7 @@
     <None Remove="Microsoft.EntityFrameworkCore.Tools" />
     <None Remove="Contracts\" />
     <None Remove="Repositories\Interfaces\" />
+    <None Remove="ValueGenerators\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.2" />
@@ -33,5 +34,6 @@
   <ItemGroup>
     <Folder Include="Repositories\" />
     <Folder Include="Repositories\Interfaces\" />
+    <Folder Include="ValueGenerators\" />
   </ItemGroup>
 </Project>

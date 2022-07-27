@@ -12,7 +12,7 @@
     "MusicTrackAPI": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:20148",
+      "applicationUrl": "http://localhost:41663",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
