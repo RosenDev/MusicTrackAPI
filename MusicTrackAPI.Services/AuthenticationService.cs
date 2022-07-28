@@ -3,10 +3,14 @@ using System.Security.Claims;
 using System.Text;
 using AutoMapper;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using MusicTrackAPI.Common;
 using MusicTrackAPI.Data.Domain;
 using MusicTrackAPI.Data.Repositories;
+using MusicTrackAPI.Data.Repositories.Interfaces;
 using MusicTrackAPI.Model;
+using MusicTrackAPI.Model.User;
 using MusicTrackAPI.Services.Interface;
 
 namespace MusicTrackAPI.Services
@@ -15,31 +19,38 @@ namespace MusicTrackAPI.Services
 	{
         private readonly IConfiguration configuration;
         private readonly IMapper mapper;
+        private readonly ILogger<AuthenticationService> logger;
         private readonly IUserRepository userRepository;
 
         public AuthenticationService(
 			IConfiguration configuration,
 			IUserRepository userRepository,
-			IMapper mapper
+			IMapper mapper,
+			ILogger<AuthenticationService> logger
 			)
 		{
             this.configuration = configuration;
             this.mapper = mapper;
+            this.logger = logger;
             this.userRepository = userRepository;
         }
 
-        public async Task<Tokens> AuthenticateAsync(UserLoginModel userLoginModel, CancellationToken ct = default)
+        public async Task<Tokens> AuthenticateAsync(UserLoginModel userLoginModel, CancellationToken ct)
         {
 			var userEntity = await userRepository.GetUserAsync(userLoginModel.Username, ct);
 
 			if(userEntity == null)
             {
-				throw new ArgumentNullException(userLoginModel.Username, "The user is not yet registered!");
+				logger.LogWarning(ErrorMessages.UserDoesNotExist);
+
+				throw new ArgumentException(ErrorMessages.UserDoesNotExist);
             }
 
 			if(!PBKDF2HashGenerator.VerifyHash(userLoginModel.Password, userEntity.Password, userEntity.Salt))
             {
-				throw new ArgumentNullException(userLoginModel.Username, "Incorrect password!");
+				logger.LogWarning(ErrorMessages.InvalidPassword);
+
+				throw new ArgumentException(ErrorMessages.InvalidPassword);
 			}
 
 			var tokenHandler = new JwtSecurityTokenHandler();
@@ -57,9 +68,18 @@ namespace MusicTrackAPI.Services
 			return new Tokens { Token = tokenHandler.WriteToken(token) };
 		}
 
-		public async Task<Tokens> RegisterUserAsync(UserModel user, CancellationToken ct = default)
+		public async Task<Tokens> RegisterUserAsync(UserRegisterModel user, CancellationToken ct)
 		{
 			var userEntity = mapper.Map<User>(user);
+
+			var exisitngUser = await userRepository.GetUserAsync(userEntity.Username, ct);
+
+			if(exisitngUser != null)
+            {
+				logger.LogWarning(ErrorMessages.UserAlreadyExist);
+
+				throw new ArgumentException(ErrorMessages.UserAlreadyExist);
+            }
 
 			var hashResult = PBKDF2HashGenerator.CreateHash(userEntity.Password);
 			

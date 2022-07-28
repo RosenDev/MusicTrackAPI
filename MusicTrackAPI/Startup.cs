@@ -1,70 +1,79 @@
-﻿    using System.Text;
-    using Autofac;
-    using Microsoft.AspNetCore.Authentication.JwtBearer;
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.IdentityModel.Tokens;
-    using Microsoft.OpenApi.Models;
-    using MusicTrackAPI.Data;
+﻿using Autofac;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Any;
+using Microsoft.OpenApi.Models;
+using MusicTrackAPI.ActionFilters;
+using MusicTrackAPI.Data;
+using System.Text;
+using static System.Net.Mime.MediaTypeNames;
 
-    namespace MusicTrackAPI
+namespace MusicTrackAPI
+{
+    public class Startup
     {
-        public class Startup
+        private readonly IHostEnvironment environment;
+
+        public Startup(IConfiguration configuration, IHostEnvironment environment)
         {
-            private readonly IHostEnvironment environment;
+            this.Configuration = configuration;
+            this.environment = environment;
+        }
 
-            public Startup(IConfiguration configuration, IHostEnvironment environment)
+        public IConfiguration Configuration { get; private set; }
+
+        public void ConfigureServices(IServiceCollection services)
+        {
+
+            services.AddDbContext<MusicTrackAPIDbContext>(opts =>
+            opts.UseMySql(Configuration.GetConnectionString("DefaultConnection"),
+            ServerVersion.AutoDetect(Configuration.GetConnectionString("DefaultConnection"))));
+
+
+            services.AddAuthentication(x =>
             {
-                this.Configuration = configuration;
-                this.environment = environment;
-            }
-
-            public IConfiguration Configuration { get; private set; }
-
-            public void ConfigureServices(IServiceCollection services)
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(o =>
             {
-
-                services.AddDbContext<MusicTrackAPIDbContext>(opts =>
-                opts.UseMySql(Configuration.GetConnectionString("DefaultConnection"),
-                ServerVersion.AutoDetect(Configuration.GetConnectionString("DefaultConnection"))));
-
-
-                services.AddAuthentication(x =>
+                var Key = Encoding.UTF8.GetBytes(Configuration["JWT:Key"]);
+                o.SaveToken = true;
+                o.TokenValidationParameters = new TokenValidationParameters
                 {
-                    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                }).AddJwtBearer(o =>
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = Configuration["JWT:Issuer"],
+                    ValidAudience = Configuration["JWT:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Key)
+                };
+            });
+
+
+            services.AddControllers(options => {
+                options.UseDateOnlyTimeOnlyStringConverters();
+                options.Filters.Add<HttpResponseExceptionFilter>();
+            })
+                .AddJsonOptions(options => options.UseDateOnlyTimeOnlyStringConverters());
+            services.AddEndpointsApiExplorer();
+            services.AddSwaggerGen(opt =>
+            {
+                opt.UseDateOnlyTimeOnlyStringConverters();
+                opt.SwaggerDoc("v1", new OpenApiInfo { Title = "MyAPI", Version = "v1" });
+                opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
-                    var Key = Encoding.UTF8.GetBytes(Configuration["JWT:Key"]);
-                    o.SaveToken = true;
-                    o.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuer = false,
-                        ValidateAudience = false,
-                        ValidateLifetime = true,
-                        ValidateIssuerSigningKey = true,
-                        ValidIssuer = Configuration["JWT:Issuer"],
-                        ValidAudience = Configuration["JWT:Audience"],
-                        IssuerSigningKey = new SymmetricSecurityKey(Key)
-                    };
+                    In = ParameterLocation.Header,
+                    Description = "",
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.Http,
+                    BearerFormat = "JWT",
+                    Scheme = "bearer"
                 });
-
-
-                services.AddControllers();
-                services.AddEndpointsApiExplorer();
-                services.AddSwaggerGen(opt =>
-                {
-                    opt.SwaggerDoc("v1", new OpenApiInfo { Title = "MyAPI", Version = "v1" });
-                    opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                opt.AddSecurityRequirement(new OpenApiSecurityRequirement
                     {
-                        In = ParameterLocation.Header,
-                        Description = "Please enter token",
-                        Name = "Authorization",
-                        Type = SecuritySchemeType.Http,
-                        BearerFormat = "JWT",
-                        Scheme = "bearer"
-                    });
-                    opt.AddSecurityRequirement(new OpenApiSecurityRequirement
-                        {
                             {
                                 new OpenApiSecurityScheme
                                 {
@@ -76,42 +85,48 @@
                                 },
                                 new string[]{}
                             }
-                        });
-                });
+                    });
 
-                services.AddOptions();
-            }
-
-
-            public void ConfigureContainer(ContainerBuilder builder)
-            {
-                builder.RegisterModule(new DataLayerModule());
-                builder.RegisterModule(new ServiceLayerModule());
-                builder.RegisterModule(new AutomapperModule());
-            }
-
-
-            public void Configure(
-              IApplicationBuilder app,
-              ILoggerFactory loggerFactory)
-            {
-
-                if (environment.IsDevelopment())
+                opt.MapType<TimeSpan>(() => new OpenApiSchema
                 {
-                    app.UseSwagger();
-                    app.UseSwaggerUI();
-                }
+                    Type = "string",
+                    Example = new OpenApiString("00:00:00")
+                });
+            });
 
-                app.UseHttpsRedirection();
+            services.AddOptions();
+        }
 
-                app.UseAuthentication();
 
-                app.UseRouting();
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            builder.RegisterModule(new DataLayerModule());
+            builder.RegisterModule(new ServiceLayerModule());
+            builder.RegisterModule(new AutomapperModule());
+        }
 
-                app.UseAuthorization();
 
-                app.UseEndpoints(x => x.MapControllers());
+        public void Configure(
+          IApplicationBuilder app,
+          ILoggerFactory loggerFactory)
+        {
+
+            if (environment.IsDevelopment())
+            {
+                app.UseSwagger();
+                app.UseSwaggerUI();
             }
+
+            app.UseHttpsRedirection();
+
+            app.UseAuthentication();
+
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.UseEndpoints(x => x.MapControllers());
         }
     }
+}
 

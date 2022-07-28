@@ -16,7 +16,7 @@ namespace MusicTrackAPI.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.6")
+                .HasAnnotation("ProductVersion", "6.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             MySqlModelBuilderExtensions.HasCharSet(modelBuilder, "utf8");
@@ -30,7 +30,7 @@ namespace MusicTrackAPI.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2022, 7, 10, 20, 30, 5, 571, DateTimeKind.Utc).AddTicks(7886));
+                        .HasDefaultValue(new DateTime(2022, 7, 27, 16, 15, 39, 201, DateTimeKind.Utc).AddTicks(8400));
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime(6)");
@@ -64,14 +64,13 @@ namespace MusicTrackAPI.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("AlbumName")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
+                    b.Property<int?>("AlbumId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2022, 7, 10, 20, 30, 5, 571, DateTimeKind.Utc).AddTicks(9770));
+                        .HasDefaultValue(new DateTime(2022, 7, 27, 16, 15, 39, 201, DateTimeKind.Utc).AddTicks(9680));
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime(6)");
@@ -89,17 +88,12 @@ namespace MusicTrackAPI.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
-                    b.Property<string>("TrackName")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<int>("TrackPosition")
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AlbumId");
 
                     b.HasIndex("CreatedAt", "Name");
 
@@ -122,7 +116,7 @@ namespace MusicTrackAPI.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2022, 7, 10, 20, 30, 5, 572, DateTimeKind.Utc).AddTicks(1828));
+                        .HasDefaultValue(new DateTime(2022, 7, 27, 16, 15, 39, 202, DateTimeKind.Utc).AddTicks(750));
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime(6)");
@@ -160,6 +154,42 @@ namespace MusicTrackAPI.Data.Migrations
                     b.ToTable("Tracks");
                 });
 
+            modelBuilder.Entity("MusicTrackAPI.Data.Domain.TrackPlaylist", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<int>("PlaylistId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TrackId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TrackPosition")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PlaylistId");
+
+                    b.HasIndex("TrackId");
+
+                    b.ToTable("TrackPlaylist");
+                });
+
             modelBuilder.Entity("MusicTrackAPI.Data.Domain.User", b =>
                 {
                     b.Property<int>("Id")
@@ -169,7 +199,7 @@ namespace MusicTrackAPI.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2022, 7, 10, 20, 30, 5, 572, DateTimeKind.Utc).AddTicks(4134));
+                        .HasDefaultValue(new DateTime(2022, 7, 27, 16, 15, 39, 202, DateTimeKind.Utc).AddTicks(2090));
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime(6)");
@@ -204,16 +234,58 @@ namespace MusicTrackAPI.Data.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("MusicTrackAPI.Data.Domain.Playlist", b =>
+                {
+                    b.HasOne("MusicTrackAPI.Data.Domain.Album", "Album")
+                        .WithMany("Playlists")
+                        .HasForeignKey("AlbumId");
+
+                    b.Navigation("Album");
+                });
+
             modelBuilder.Entity("MusicTrackAPI.Data.Domain.Track", b =>
                 {
-                    b.HasOne("MusicTrackAPI.Data.Domain.Album", null)
+                    b.HasOne("MusicTrackAPI.Data.Domain.Album", "Album")
                         .WithMany("Tracks")
                         .HasForeignKey("AlbumId");
+
+                    b.Navigation("Album");
+                });
+
+            modelBuilder.Entity("MusicTrackAPI.Data.Domain.TrackPlaylist", b =>
+                {
+                    b.HasOne("MusicTrackAPI.Data.Domain.Playlist", "Playlist")
+                        .WithMany("TracksPlaylists")
+                        .HasForeignKey("PlaylistId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MusicTrackAPI.Data.Domain.Track", "Track")
+                        .WithMany("TracksPlaylists")
+                        .HasForeignKey("TrackId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Playlist");
+
+                    b.Navigation("Track");
                 });
 
             modelBuilder.Entity("MusicTrackAPI.Data.Domain.Album", b =>
                 {
+                    b.Navigation("Playlists");
+
                     b.Navigation("Tracks");
+                });
+
+            modelBuilder.Entity("MusicTrackAPI.Data.Domain.Playlist", b =>
+                {
+                    b.Navigation("TracksPlaylists");
+                });
+
+            modelBuilder.Entity("MusicTrackAPI.Data.Domain.Track", b =>
+                {
+                    b.Navigation("TracksPlaylists");
                 });
 #pragma warning restore 612, 618
         }
