@@ -11,12 +11,6 @@ namespace MusicTrackAPI.Data
         {
             base.Configure(builder);
 
-            builder.Property(x => x.TrackName)
-                .HasColumnType("varchar(255)");
-
-            builder.Property(x => x.AlbumName)
-                .HasColumnType("varchar(255)");
-
             builder.Property(x => x.Name)
                 .HasColumnType("varchar(255)");
 

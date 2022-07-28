@@ -10,7 +10,7 @@ namespace MusicTrackAPI.Tests
 	public class UserServiceTests
 	{
         [Fact]
-		public async Task<bool> GetUser_ShouldReturnUser()
+		public async Task GetUser_ShouldReturnUser()
         {
 			var userServiceMock = new Mock<IUserService>();
 			var testData = new UserModel
@@ -24,8 +24,6 @@ namespace MusicTrackAPI.Tests
 			var userService = userServiceMock.Object;
 
 		    Assert.Equal(testData.Email, (await userService.GetUserAsync(testData.Username, default)).Email);
-
-            return true;
         }
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MusicTrackAPI.Data.Domain;
+using MusicTrackAPI.Data.Repositories.Interfaces;
 
 namespace MusicTrackAPI.Data.Repositories
 {

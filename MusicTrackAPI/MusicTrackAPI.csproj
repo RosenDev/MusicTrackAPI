@@ -7,21 +7,23 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.6" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.7" />
     <PackageReference Include="Autofac" Version="6.4.0" />
     <PackageReference Include="AutoMapper.Contrib.Autofac.DependencyInjection" Version="6.1.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.6" />
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.6">
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.7" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.7">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.6">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.7">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
+    <PackageReference Include="DateOnlyTimeOnly.AspNet.Swashbuckle" Version="1.0.3" />
+    <PackageReference Include="DateOnlyTimeOnly.AspNet" Version="1.0.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,9 +37,9 @@
     <None Remove="Microsoft.EntityFrameworkCore.Design" />
     <None Remove="Microsoft.EntityFrameworkCore.Tools" />
     <None Remove="Autofac.Extensions.DependencyInjection" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controllers\" />
+    <None Remove="DateOnlyTimeOnly.AspNet.Swashbuckle" />
+    <None Remove="DateOnlyTimeOnly.AspNet" />
+    <None Remove="ActionFilters\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MusicTrackAPI.Data\MusicTrackAPI.Data.csproj">
@@ -48,5 +50,11 @@
     </ProjectReference>
     <ProjectReference Include="..\MusicTrackAPI.Data.Domain\MusicTrackAPI.Data.Domain.csproj">
     </ProjectReference>
+    <ProjectReference Include="..\MusicTrackAPI.Common\MusicTrackAPI.Common.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ActionFilters\" />
   </ItemGroup>
 </Project>

@@ -1,6 +1,9 @@
-﻿using System.Linq.Expressions;
+﻿using System.Linq;
+using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
+using MusicTrackAPI.Common;
 using MusicTrackAPI.Data.Domain;
+using MusicTrackAPI.Data.Repositories.Interfaces;
 
 namespace MusicTrackAPI.Data.Repositories
 {
@@ -17,7 +20,7 @@ namespace MusicTrackAPI.Data.Repositories
         }
 
         
-        public async Task<bool> DeleteAsync(int id, CancellationToken ct = default)
+        public virtual async Task<bool> DeleteAsync(int id, CancellationToken ct)
         {
             var entity = await Set.FindAsync(id);
 
@@ -30,18 +33,36 @@ namespace MusicTrackAPI.Data.Repositories
 
         }
 
-        public async Task<TEntity> FindAsync(int id, CancellationToken ct = default)
+        public virtual async Task<TEntity> FindAsync(int id, CancellationToken ct)
         {
-            return await Set.FindAsync(new object[] { id }, ct);
+            return await ApplyInclude(Set).FirstOrDefaultAsync(x => x.Id == id, ct);
         }
 
-        public async Task<List<TEntity>> QueryAsync(Expression<Func<TEntity, bool>> query, CancellationToken ct = default)
+        public virtual async Task<List<TEntity>> QueryAsync(List<Expression<Func<TEntity, bool>>> query, Paging paging, CancellationToken ct)
         {
-            return await Set.AsQueryable().AsNoTracking().Where(query).ToListAsync(ct);
+            Expression<Func<TEntity, bool>> fake = x => false;
+
+            var binaryExpression = Expression.OrElse(fake , fake);
+
+            var param = Expression.Parameter(typeof(TEntity), "entity");
+
+            query.ForEach(x => binaryExpression = Expression.OrElse(binaryExpression, Expression.Invoke(x, param)));
+
+            var lambda = Expression.Lambda<Func<TEntity, bool>>(binaryExpression, param);
+
+
+            var result = await ApplyInclude(Set.Where(lambda)).AsNoTracking()
+                .Skip(paging.Page - 1)
+                .Take(paging.Size)
+                .ToListAsync(ct);
+
+            return result;
         }
 
-        public async Task<TEntity> AddAsync(TEntity entity, CancellationToken ct = default)
+        public virtual async Task<TEntity> AddAsync(TEntity entity, CancellationToken ct)
         {
+            entity.CreatedAt = DateTime.UtcNow;
+
             Set.Add(entity);
 
             await Context.SaveChangesAsync(ct);
@@ -49,14 +70,24 @@ namespace MusicTrackAPI.Data.Repositories
             return entity;
         }
 
-        public async Task<TEntity> UpdateAsync(TEntity entity, CancellationToken ct = default)
+        public virtual async Task<TEntity> UpdateAsync(TEntity entity, CancellationToken ct)
         {
-            Set.Update(entity);
 
+            var existingEnitity = await Set.FirstOrDefaultAsync(x => x.Id == entity.Id, ct);
+
+            entity.CreatedAt = existingEnitity.CreatedAt;
+
+            Set.Update(entity);
+            
             await Context.SaveChangesAsync(ct);
 
             return entity;
         }
+
+      protected virtual IQueryable<TEntity> ApplyInclude(IQueryable<TEntity> query)
+      {
+          return query;
+      }
     }
 }
 

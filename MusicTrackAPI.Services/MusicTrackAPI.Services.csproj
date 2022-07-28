@@ -13,13 +13,11 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="11.0.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.7" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MusicTrackAPI.Data\MusicTrackAPI.Data.csproj" />
     <ProjectReference Include="..\MusicTrackAPI.Model\MusicTrackAPI.Model.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Interface\" />
+    <ProjectReference Include="..\MusicTrackAPI.Common\MusicTrackAPI.Common.csproj" />
   </ItemGroup>
 </Project>

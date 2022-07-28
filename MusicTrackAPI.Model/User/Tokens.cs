@@ -1,11 +1,9 @@
 ﻿using System;
-namespace MusicTrackAPI.Model
+namespace MusicTrackAPI.Model.User
 {
 	public class Tokens
 	{
         public string Token { get; set; }
-        public string RefreshToken { get; set; }
-
     }
 }
 

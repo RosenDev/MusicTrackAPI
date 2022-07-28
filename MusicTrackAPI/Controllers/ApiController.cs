@@ -1,53 +1,81 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MusicTrackAPI.Common;
 using MusicTrackAPI.Data.Domain.Interface;
 using MusicTrackAPI.Model.Interface;
 using MusicTrackAPI.Services.Interface;
 
 namespace MusicTrackAPI.Controllers
 {
-	[ApiController]
-	[Authorize]
-	[Route("api/[controller]")]
-	public class ApiController<TEntity, TApiEntity>: ControllerBase
-		where TEntity: IEntity<int>
+    [ApiController]
+    [Authorize]
+    [Route("api/[controller]")]
+    public class ApiController<TEntity, TApiEntity> : ControllerBase
+        where TEntity : IEntity<int>
         where TApiEntity : IApiEntity<int>
     {
         private readonly IDataService<TEntity, TApiEntity> dataService;
+        protected readonly ILogger<ApiController<TEntity, TApiEntity>> logger;
 
-        public ApiController(IDataService<TEntity, TApiEntity> dataService)
-		{
+        public ApiController(
+            IDataService<TEntity, TApiEntity> dataService,
+            ILogger<ApiController<TEntity, TApiEntity>> logger)
+        {
             this.dataService = dataService;
+            this.logger = logger;
         }
 
-		[HttpGet]
-		public async Task<IActionResult> BulkGet()
+        [HttpPost("search")]
+        public virtual async Task<IActionResult> QueryAsync([FromBody] List<FieldFilter> filters, [FromQuery] Paging paging, CancellationToken ct)
         {
-			return Ok();
+            try
+            {
+               var result = await dataService.QueryAsync(filters, paging, ct);
+
+               return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                logger.LogWarning(ex.Message);
+
+                throw;
+            }
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById([FromRoute]int id, CancellationToken ct)
+        public virtual async Task<IActionResult> GetById([FromRoute] int id, CancellationToken ct)
         {
-            return Ok(await dataService.GetByIdAsync(id, ct));
+            try
+            { 
+
+                 return Ok(await dataService.GetByIdAsync(id, ct));
+            }
+            catch (Exception ex)
+            {
+                logger.LogWarning(ex.Message);
+
+                throw;
+            }
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Create([FromBody] TApiEntity apiModel, CancellationToken ct)
-        {
-            return Ok(await dataService.CreateAsync(apiModel, ct));
-        }
-
-        [HttpPut]
-        public async Task<IActionResult> Update([FromBody] TApiEntity apiModel, CancellationToken ct)
-        {
-            return Ok(await dataService.UpdateAsync(apiModel, ct));
-        }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete([FromRoute] int id, CancellationToken ct)
+        public virtual async Task<IActionResult> Delete([FromRoute] int id, CancellationToken ct)
         {
-            return Ok(await dataService.DeleteAsync(id, ct));
+
+            try
+            {
+                await dataService.DeleteAsync(id, ct);
+
+                return Ok();
+            }
+            catch(Exception ex)
+            {
+                logger.LogWarning(ex.Message);
+
+                throw;
+            }
+            
         }
     }
 }

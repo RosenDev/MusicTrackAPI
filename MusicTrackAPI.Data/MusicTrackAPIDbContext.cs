@@ -63,9 +63,11 @@
             foreach (var entry in changedEntries)
             {
                 var entity = (IEntity<int>)entry.Entity;
+
                 if (entry.State == EntityState.Modified && entity.UpdatedAt == null)
                 {
                     entity.UpdatedAt = DateTime.UtcNow;
+
                 } else if(entry.State == EntityState.Deleted && entity.DeletedAt == null) {
                     entity.DeletedAt = DateTime.UtcNow;
                     entity.IsDeleted = true;
