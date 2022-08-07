@@ -66,19 +66,19 @@ namespace MusicTrackAPI.Services
                     {
                         case FieldValueType.Number:
 
-                            parsedFilters.Add(BuildExpression<int>(filter.Field, int.Parse(filter.Value)));
+                            parsedFilters.Add(BuildExpression(filter.Field, int.Parse(filter.Value)));
 
                             break;
 
                         case FieldValueType.Text:
 
-                            parsedFilters.Add(BuildExpression<string>(filter.Field, filter.Value));
+                            parsedFilters.Add(BuildExpression(filter.Field, filter.Value));
 
                             break;
 
                         case FieldValueType.TrackType:
 
-                            parsedFilters.Add(BuildExpression<TrackType>(filter.Field, Enum.Parse<TrackType>(filter.Value)));
+                            parsedFilters.Add(BuildExpression(filter.Field, Enum.Parse<TrackType>(filter.Value)));
 
                             break;
                         default:
