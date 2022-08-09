@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Moq;
 using MusicTrackAPI.Common;
-using MusicTrackAPI.Model;
 using MusicTrackAPI.Model.Track;
 using MusicTrackAPI.Services.Interface;
 using Xunit;
@@ -35,19 +34,10 @@ public class TracksServiceTests
     }
 
     [Fact]
-    public async Task TrackService_QueryAsync_ShouldReturnNoTracks_WhenThereIsNoData()
+    public async Task TrackService_QueryAsync_ShouldNotReturnTracks_WhenThereIsNoData()
     {
         var trackServiceMock = new Mock<ITrackService>();
-        var testTrack = new TrackModel
-        {
-            Name = "Test track",
-            ArrangedBy = "Test User",
-            PerformedBy = "Another Test User",
-            WrittenBy = "Test",
-            Type = TrackType.FilmMusic,
-            Duration = TimeSpan.Zero
-        };
-        var testData = new List<TrackModel> { testTrack };
+        var testData = new List<TrackModel>();
         trackServiceMock.Setup(x => x.QueryAsync(It.IsAny<List<FieldFilter>>(), It.IsAny<Paging>(), default))
             .ReturnsAsync(() => new PagedResponse<TrackModel> { Result = testData });
 
@@ -93,28 +83,28 @@ public class TracksServiceTests
         Assert.Null(await trackService.GetByIdAsync(7, default));
     }
 
-    //[Fact]
-    //public async Task TrackService_UpdateTrackAsync_ShouldReturnTrackId_WhenTrackExists()
-    //{
-    //    var trackServiceMock = new Mock<ITrackService>();
-    //    var testTrack = new TrackModel
-    //    {
-    //        Id = 7,
-    //        Name = "Test track",
-    //        ArrangedBy = "Test User",
-    //        PerformedBy = "Another Test User",
-    //        WrittenBy = "Test",
-    //        Type = TrackType.LivePerformance,
-    //        Duration = TimeSpan.Zero
-    //    };
+    [Fact]
+    public async Task TrackService_UpdateTrackAsync_ShouldReturnTrackId_WhenTrackExists()
+    {
+        var trackServiceMock = new Mock<ITrackService>();
+        var testTrack = new TrackModel
+        {
+            Id = 7,
+            Name = "Test track",
+            ArrangedBy = "Test User",
+            PerformedBy = "Another Test User",
+            WrittenBy = "Test",
+            Type = TrackType.LivePerformance,
+            Duration = TimeSpan.Zero
+        };
 
-    //    trackServiceMock.Setup(x => x.UpdateTrackAsync(It.Is<int>(x => x == testTrack.Id), default))
-    //        .ReturnsAsync(() => testTrack);
+        trackServiceMock.Setup(x => x.UpdateTrackAsync(It.Is<TrackUpdateModel>(x => x.Id == testTrack.Id), default))
+            .ReturnsAsync(() => testTrack.Id);
 
-    //    var trackService = trackServiceMock.Object;
+        var trackService = trackServiceMock.Object;
 
-    //    Assert.NotNull(await trackService.GetByIdAsync(7, default));
-    //}
+        Assert.Equal(testTrack.Id, await trackService.UpdateTrackAsync(new TrackUpdateModel {  Id = 7, ArrangedBy = "test"}, default));
+    }
 
     [Fact]
     public async Task TrackService_UpdateTrackAsync_ShouldThrowException_WhenTrackDoesNotExists()
