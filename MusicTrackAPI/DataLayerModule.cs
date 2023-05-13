@@ -6,10 +6,6 @@ namespace MusicTrackAPI
 {
     public class DataLayerModule : Module
     {
-        public DataLayerModule()
-        {
-        }
-
         protected override void Load(ContainerBuilder builder)
         {
             base.Load(builder);

@@ -1,10 +1,7 @@
-﻿using System;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.Extensions.Logging;
 using MusicTrackAPI.Data.Domain;
-using MusicTrackAPI.Data.Repositories;
 using MusicTrackAPI.Data.Repositories.Interfaces;
-using MusicTrackAPI.Model;
 using MusicTrackAPI.Model.Track;
 using MusicTrackAPI.Services.Interface;
 
@@ -26,7 +23,7 @@ namespace MusicTrackAPI.Services
         {
             var entity = mapper.Map<Track>(createTrackModel);
 
-           return (await trackRepository.AddAsync(entity, ct)).Id;
+            return (await trackRepository.AddAsync(entity, ct)).Id;
         }
 
         public async Task<int> UpdateTrackAsync(TrackUpdateModel updateTrackModel, CancellationToken ct)

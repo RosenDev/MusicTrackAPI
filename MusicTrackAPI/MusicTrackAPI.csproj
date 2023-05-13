@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
@@ -42,11 +42,8 @@
     <None Remove="ActionFilters\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MusicTrackAPI.Commands\MusicTrackAPI.Commands.csproj" />
     <ProjectReference Include="..\MusicTrackAPI.Data\MusicTrackAPI.Data.csproj">
-    </ProjectReference>
-    <ProjectReference Include="..\MusicTrackAPI.Services\MusicTrackAPI.Services.csproj">
-    </ProjectReference>
-    <ProjectReference Include="..\MusicTrackAPI.Model\MusicTrackAPI.Model.csproj">
     </ProjectReference>
     <ProjectReference Include="..\MusicTrackAPI.Data.Domain\MusicTrackAPI.Data.Domain.csproj">
     </ProjectReference>

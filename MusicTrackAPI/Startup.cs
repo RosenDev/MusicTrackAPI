@@ -1,14 +1,12 @@
-﻿using Autofac;
+﻿using System.Text;
+using Autofac;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 using MusicTrackAPI.ActionFilters;
 using MusicTrackAPI.Data;
-using System.Text;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace MusicTrackAPI
 {
@@ -53,7 +51,8 @@ namespace MusicTrackAPI
             });
 
 
-            services.AddControllers(options => {
+            services.AddControllers(options =>
+            {
                 options.UseDateOnlyTimeOnlyStringConverters();
                 options.Filters.Add<HttpResponseExceptionFilter>();
             })
@@ -94,6 +93,7 @@ namespace MusicTrackAPI
                 });
             });
 
+            services.AddCors();
             services.AddOptions();
         }
 
@@ -111,7 +111,7 @@ namespace MusicTrackAPI
           ILoggerFactory loggerFactory)
         {
 
-            if (environment.IsDevelopment())
+            if(environment.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
@@ -124,6 +124,13 @@ namespace MusicTrackAPI
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors(opts =>
+            {
+                opts.AllowAnyMethod();
+                opts.AllowAnyHeader();
+                opts.WithOrigins("");
+            });
 
             app.UseEndpoints(x => x.MapControllers());
         }

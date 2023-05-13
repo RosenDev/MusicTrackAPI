@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MusicTrackAPI.Commands.Common;
 using MusicTrackAPI.Common;
 using MusicTrackAPI.Data.Domain.Interface;
 using MusicTrackAPI.Model.Interface;
-using MusicTrackAPI.Services.Interface;
 
 namespace MusicTrackAPI.Controllers
 {
@@ -14,14 +15,15 @@ namespace MusicTrackAPI.Controllers
         where TEntity : IEntity<int>
         where TApiEntity : IApiEntity<int>
     {
-        private readonly IDataService<TEntity, TApiEntity> dataService;
+        protected readonly IMediator mediator;
         protected readonly ILogger<ApiController<TEntity, TApiEntity>> logger;
 
         public ApiController(
-            IDataService<TEntity, TApiEntity> dataService,
-            ILogger<ApiController<TEntity, TApiEntity>> logger)
+            IMediator mediator,
+            ILogger<ApiController<TEntity, TApiEntity>> logger
+            )
         {
-            this.dataService = dataService;
+            this.mediator = mediator;
             this.logger = logger;
         }
 
@@ -30,11 +32,15 @@ namespace MusicTrackAPI.Controllers
         {
             try
             {
-               var result = await dataService.QueryAsync(filters, paging, ct);
+                var result = await mediator.Send(new SearchEntityQuery<TApiEntity>
+                {
+                    Filters = filters,
+                    Paging = paging
+                });
 
-               return Ok(result);
+                return Ok(result);
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 logger.LogWarning(ex.Message);
 
@@ -46,11 +52,10 @@ namespace MusicTrackAPI.Controllers
         public virtual async Task<IActionResult> GetById([FromRoute] int id, CancellationToken ct)
         {
             try
-            { 
-
-                 return Ok(await dataService.GetByIdAsync(id, ct));
+            {
+                return Ok(await mediator.Send(new GetEntityByIdQuery<TApiEntity> { Id = id }));
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 logger.LogWarning(ex.Message);
 
@@ -58,14 +63,12 @@ namespace MusicTrackAPI.Controllers
             }
         }
 
-
         [HttpDelete("{id}")]
         public virtual async Task<IActionResult> Delete([FromRoute] int id, CancellationToken ct)
         {
-
             try
             {
-                await dataService.DeleteAsync(id, ct);
+                await mediator.Send(new DeleteEntityCommand<TApiEntity> { Id = id });
 
                 return Ok();
             }
@@ -75,7 +78,6 @@ namespace MusicTrackAPI.Controllers
 
                 throw;
             }
-            
         }
     }
 }

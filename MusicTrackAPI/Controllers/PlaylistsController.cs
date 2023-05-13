@@ -1,4 +1,4 @@
-﻿using Autofac;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using MusicTrackAPI.Data.Domain;
 using MusicTrackAPI.Model;
@@ -12,10 +12,10 @@ namespace MusicTrackAPI.Controllers
     {
         private readonly IPlaylistService playlistService;
 
-        public PlaylistsController(IPlaylistService playlistService, ILogger<PlaylistsController> logger)
-            : base(playlistService, logger)
+        public PlaylistsController(IMediator mediator, ILogger<PlaylistsController> logger)
+            : base(mediator, logger)
         {
-            this.playlistService = playlistService;
+
         }
 
         [HttpPost]

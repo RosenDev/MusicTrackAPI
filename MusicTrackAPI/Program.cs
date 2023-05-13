@@ -13,23 +13,23 @@ public class Program
             .ConfigureWebHostDefaults(webHostBuilder =>
             {
                 webHostBuilder
-              .UseContentRoot(Directory.GetCurrentDirectory())
-              .UseStartup<Startup>();
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseStartup<Startup>();
             })
             .Build();
 
 
-            using var scope = host.Services.CreateScope();
+        using var scope = host.Services.CreateScope();
 
-            var dbContext = scope.ServiceProvider.GetRequiredService<MusicTrackAPIDbContext>();
+        var dbContext = scope.ServiceProvider.GetRequiredService<MusicTrackAPIDbContext>();
 
-            var pendingMigrations = await dbContext.Database.GetPendingMigrationsAsync();
+        var pendingMigrations = await dbContext.Database.GetPendingMigrationsAsync();
 
-            if (pendingMigrations.Count() > 0)
-            {
-               await dbContext.Database.MigrateAsync();
-            }
-            
+        if(pendingMigrations.Count() > 0)
+        {
+            await dbContext.Database.MigrateAsync();
+        }
+
         host.Run();
     }
 }

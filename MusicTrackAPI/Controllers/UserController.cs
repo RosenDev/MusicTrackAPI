@@ -1,7 +1,6 @@
-﻿using System.Text.RegularExpressions;
+﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MusicTrackAPI.Common;
 using MusicTrackAPI.Data.Domain;
 using MusicTrackAPI.Model;
 using MusicTrackAPI.Model.User;
@@ -17,8 +16,9 @@ namespace MusicTrackAPI.Controllers
         public UserController(
             IAuthenticationService authenticationService,
             IUserService userService,
+            IMediator mediator,
             ILogger<UserController> logger
-            ) : base(userService, logger)
+            ) : base(mediator, logger)
         {
             this.authenticationService = authenticationService;
             this.userService = userService;
@@ -35,7 +35,7 @@ namespace MusicTrackAPI.Controllers
                 return Ok(tokens);
 
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 if(ex is ArgumentException argEx)
                 {
@@ -44,7 +44,7 @@ namespace MusicTrackAPI.Controllers
 
                 throw;
             }
-  
+
         }
 
         [AllowAnonymous]
@@ -59,7 +59,7 @@ namespace MusicTrackAPI.Controllers
                 return Ok(tokens);
 
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 if(ex is ArgumentException argEx)
                 {

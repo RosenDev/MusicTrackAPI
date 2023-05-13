@@ -1,10 +1,7 @@
-﻿using Autofac;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using MusicTrackAPI.Data.Domain;
-using MusicTrackAPI.Model;
-using MusicTrackAPI.Model.Album;
 using MusicTrackAPI.Model.Track;
-using MusicTrackAPI.Services;
 using MusicTrackAPI.Services.Interface;
 
 namespace MusicTrackAPI.Controllers
@@ -13,7 +10,12 @@ namespace MusicTrackAPI.Controllers
     {
         private readonly ITrackService trackService;
 
-        public TracksController(ITrackService trackService, ILogger<TracksController> logger) : base(trackService, logger)
+        public TracksController(
+            ITrackService trackService,
+            IMediator mediator,
+            ILogger<TracksController> logger
+            )
+            : base(mediator, logger)
         {
             this.trackService = trackService;
         }
