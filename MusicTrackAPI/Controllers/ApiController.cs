@@ -19,7 +19,8 @@ namespace MusicTrackAPI.Controllers
 
         public ApiController(
             IDataService<TEntity, TApiEntity> dataService,
-            ILogger<ApiController<TEntity, TApiEntity>> logger)
+            ILogger<ApiController<TEntity, TApiEntity>> logger
+            )
         {
             this.dataService = dataService;
             this.logger = logger;
@@ -30,11 +31,11 @@ namespace MusicTrackAPI.Controllers
         {
             try
             {
-               var result = await dataService.QueryAsync(filters, paging, ct);
+                var result = await dataService.QueryAsync(filters, paging, ct);
 
-               return Ok(result);
+                return Ok(result);
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 logger.LogWarning(ex.Message);
 
@@ -46,11 +47,10 @@ namespace MusicTrackAPI.Controllers
         public virtual async Task<IActionResult> GetById([FromRoute] int id, CancellationToken ct)
         {
             try
-            { 
-
-                 return Ok(await dataService.GetByIdAsync(id, ct));
+            {
+                return Ok(await dataService.GetByIdAsync(id, ct));
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 logger.LogWarning(ex.Message);
 
@@ -58,11 +58,9 @@ namespace MusicTrackAPI.Controllers
             }
         }
 
-
         [HttpDelete("{id}")]
         public virtual async Task<IActionResult> Delete([FromRoute] int id, CancellationToken ct)
         {
-
             try
             {
                 await dataService.DeleteAsync(id, ct);
@@ -75,7 +73,6 @@ namespace MusicTrackAPI.Controllers
 
                 throw;
             }
-            
         }
     }
 }
