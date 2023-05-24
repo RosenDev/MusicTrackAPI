@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MusicTrackAPI.Commands.Playlist;
 using MusicTrackAPI.Data.Domain;
 using MusicTrackAPI.Model;
 using MusicTrackAPI.Model.User;
@@ -10,18 +11,15 @@ namespace MusicTrackAPI.Controllers
 {
     public class UserController : ApiController<User, UserModel>
     {
-        private readonly IAuthenticationService authenticationService;
-        private readonly IUserService userService;
+        private readonly IMediator mediator;
 
         public UserController(
-            IAuthenticationService authenticationService,
-            IUserService userService,
             IMediator mediator,
+            IDataService<User, UserModel> dataService,
             ILogger<UserController> logger
-            ) : base(mediator, logger)
+            ) : base(dataService, logger)
         {
-            this.authenticationService = authenticationService;
-            this.userService = userService;
+            this.mediator = mediator;
         }
 
         [AllowAnonymous]
@@ -30,7 +28,10 @@ namespace MusicTrackAPI.Controllers
         {
             try
             {
-                var tokens = await authenticationService.AuthenticateAsync(userLoginModel, ct);
+                var tokens = await mediator.Send(new LoginUserCommand
+                {
+                    UserLoginModel = userLoginModel
+                });
 
                 return Ok(tokens);
 
@@ -44,17 +45,18 @@ namespace MusicTrackAPI.Controllers
 
                 throw;
             }
-
         }
 
         [AllowAnonymous]
         [HttpPost("register")]
-        public async Task<IActionResult> RegisterAsync([FromBody] UserRegisterModel user, CancellationToken ct)
+        public async Task<IActionResult> RegisterAsync([FromBody] UserRegisterModel userRegisterModel, CancellationToken ct)
         {
             try
             {
-
-                var tokens = await authenticationService.RegisterUserAsync(user, ct);
+                var tokens = await mediator.Send(new RegisterUserCommand
+                {
+                    UserRegisterModel = userRegisterModel
+                });
 
                 return Ok(tokens);
 
@@ -73,10 +75,12 @@ namespace MusicTrackAPI.Controllers
         [HttpGet("getcurrentuser")]
         public async Task<IActionResult> GetCurrentUserAsync(CancellationToken ct)
         {
-
             var currentUserUsername = User.Identity.Name;
 
-            return Ok(await userService.GetUserAsync(currentUserUsername, ct));
+            return Ok(await mediator.Send(new GetCurrentUserCommand
+            {
+                Username = currentUserUsername
+            }));
         }
     }
 }

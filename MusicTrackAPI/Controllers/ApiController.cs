@@ -1,10 +1,9 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MusicTrackAPI.Commands.Common;
 using MusicTrackAPI.Common;
 using MusicTrackAPI.Data.Domain.Interface;
 using MusicTrackAPI.Model.Interface;
+using MusicTrackAPI.Services.Interface;
 
 namespace MusicTrackAPI.Controllers
 {
@@ -15,15 +14,15 @@ namespace MusicTrackAPI.Controllers
         where TEntity : IEntity<int>
         where TApiEntity : IApiEntity<int>
     {
-        protected readonly IMediator mediator;
+        private readonly IDataService<TEntity, TApiEntity> dataService;
         protected readonly ILogger<ApiController<TEntity, TApiEntity>> logger;
 
         public ApiController(
-            IMediator mediator,
+            IDataService<TEntity, TApiEntity> dataService,
             ILogger<ApiController<TEntity, TApiEntity>> logger
             )
         {
-            this.mediator = mediator;
+            this.dataService = dataService;
             this.logger = logger;
         }
 
@@ -32,11 +31,7 @@ namespace MusicTrackAPI.Controllers
         {
             try
             {
-                var result = await mediator.Send(new SearchEntityQuery<TApiEntity>
-                {
-                    Filters = filters,
-                    Paging = paging
-                });
+                var result = await dataService.QueryAsync(filters, paging, ct);
 
                 return Ok(result);
             }
@@ -53,7 +48,7 @@ namespace MusicTrackAPI.Controllers
         {
             try
             {
-                return Ok(await mediator.Send(new GetEntityByIdQuery<TApiEntity> { Id = id }));
+                return Ok(await dataService.GetByIdAsync(id, ct));
             }
             catch(Exception ex)
             {
@@ -68,7 +63,7 @@ namespace MusicTrackAPI.Controllers
         {
             try
             {
-                await mediator.Send(new DeleteEntityCommand<TApiEntity> { Id = id });
+                await dataService.DeleteAsync(id, ct);
 
                 return Ok();
             }

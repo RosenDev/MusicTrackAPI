@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 using MusicTrackAPI.ActionFilters;
+using MusicTrackAPI.Commands.Playlist;
 using MusicTrackAPI.Data;
 
 namespace MusicTrackAPI
@@ -26,9 +27,10 @@ namespace MusicTrackAPI
         {
 
             services.AddDbContext<MusicTrackAPIDbContext>(opts =>
-            opts.UseMySql(Configuration.GetConnectionString("DefaultConnection"),
-            ServerVersion.AutoDetect(Configuration.GetConnectionString("DefaultConnection"))));
+            opts.UseMySql(Configuration.GetConnectionString("MySqlConnection"),
+            ServerVersion.AutoDetect(Configuration.GetConnectionString("MySqlConnection"))));
 
+            services.AddMediatR(x => x.RegisterServicesFromAssembly(typeof(CreatePlaylistCommand).Assembly));
 
             services.AddAuthentication(x =>
             {

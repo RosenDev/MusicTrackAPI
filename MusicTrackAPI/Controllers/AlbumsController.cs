@@ -3,14 +3,22 @@ using Microsoft.AspNetCore.Mvc;
 using MusicTrackAPI.Commands.Album;
 using MusicTrackAPI.Data.Domain;
 using MusicTrackAPI.Model.Album;
+using MusicTrackAPI.Services.Interface;
 
 namespace MusicTrackAPI.Controllers
 {
     public class AlbumsController : ApiController<Album, AlbumModel>
     {
-        public AlbumsController(IMediator mediator, ILogger<AlbumsController> logger)
-            : base(mediator, logger)
+        private readonly IMediator mediator;
+
+        public AlbumsController(
+            IMediator mediator,
+            IDataService<Album, AlbumModel> dataService,
+            ILogger<AlbumsController> logger
+            )
+            : base(dataService, logger)
         {
+            this.mediator = mediator;
         }
 
         [HttpPost]

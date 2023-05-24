@@ -10,6 +10,10 @@ public class Program
     {
         var host = Host.CreateDefaultBuilder(args)
             .UseServiceProviderFactory(new AutofacServiceProviderFactory())
+            .ConfigureAppConfiguration(config =>
+            {
+                config.AddEnvironmentVariables();
+            })
             .ConfigureWebHostDefaults(webHostBuilder =>
             {
                 webHostBuilder
