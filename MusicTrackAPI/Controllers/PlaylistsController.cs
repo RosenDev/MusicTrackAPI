@@ -1,17 +1,7 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Mvc;
-using MusicTrackAPI.Commands.Playlist;
-using MusicTrackAPI.Data.Domain;
-using MusicTrackAPI.Model;
-using MusicTrackAPI.Model.Playlist;
-using MusicTrackAPI.Model.Track;
-using MusicTrackAPI.Services.Interface;
-
-namespace MusicTrackAPI.Controllers
+﻿namespace MusicTrackAPI.Controllers
 {
     public class PlaylistsController : ApiController<Playlist, PlaylistModel>
     {
-        private readonly IPlaylistService playlistService;
         private readonly IMediator mediator;
 
         public PlaylistsController(
