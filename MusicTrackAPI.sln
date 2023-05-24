@@ -1,21 +1,23 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 25.0.1700.0
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicTrackAPI", "MusicTrackAPI\MusicTrackAPI.csproj", "{C51CA013-371D-4B7A-9216-F135344F4699}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicTrackAPI", "MusicTrackAPI\MusicTrackAPI.csproj", "{C51CA013-371D-4B7A-9216-F135344F4699}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicTrackAPI.Data", "MusicTrackAPI.Data\MusicTrackAPI.Data.csproj", "{AA929B10-12F6-4EB3-BEFA-23B49CFB53E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicTrackAPI.Data", "MusicTrackAPI.Data\MusicTrackAPI.Data.csproj", "{AA929B10-12F6-4EB3-BEFA-23B49CFB53E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicTrackAPI.Data.Domain", "MusicTrackAPI.Data.Domain\MusicTrackAPI.Data.Domain.csproj", "{6C310E48-A4E9-48E6-B9FF-F2A7CA636D01}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicTrackAPI.Data.Domain", "MusicTrackAPI.Data.Domain\MusicTrackAPI.Data.Domain.csproj", "{6C310E48-A4E9-48E6-B9FF-F2A7CA636D01}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicTrackAPI.Common", "MusicTrackAPI.Common\MusicTrackAPI.Common.csproj", "{5650FB44-7D0B-4C52-A3E1-1C03BBAF6F81}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicTrackAPI.Common", "MusicTrackAPI.Common\MusicTrackAPI.Common.csproj", "{5650FB44-7D0B-4C52-A3E1-1C03BBAF6F81}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicTrackAPI.Services", "MusicTrackAPI.Services\MusicTrackAPI.Services.csproj", "{A54C04D0-1416-4578-8304-2C93D9ED206F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicTrackAPI.Services", "MusicTrackAPI.Services\MusicTrackAPI.Services.csproj", "{A54C04D0-1416-4578-8304-2C93D9ED206F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicTrackAPI.Tests", "MusicTrackAPI.Tests\MusicTrackAPI.Tests.csproj", "{8D62C120-281F-48CC-AEC6-AF8254485320}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicTrackAPI.Tests", "MusicTrackAPI.Tests\MusicTrackAPI.Tests.csproj", "{8D62C120-281F-48CC-AEC6-AF8254485320}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicTrackAPI.Model", "MusicTrackAPI.Model\MusicTrackAPI.Model.csproj", "{8DB4AC68-E2B3-47CC-81A8-77BC8D07FCD6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicTrackAPI.Model", "MusicTrackAPI.Model\MusicTrackAPI.Model.csproj", "{8DB4AC68-E2B3-47CC-81A8-77BC8D07FCD6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicTrackAPI.Commands", "MusicTrackAPI.Commands\MusicTrackAPI.Commands.csproj", "{289F9B41-3683-4EC2-A4D2-78AE70ABE090}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{8DB4AC68-E2B3-47CC-81A8-77BC8D07FCD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8DB4AC68-E2B3-47CC-81A8-77BC8D07FCD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8DB4AC68-E2B3-47CC-81A8-77BC8D07FCD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{289F9B41-3683-4EC2-A4D2-78AE70ABE090}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{289F9B41-3683-4EC2-A4D2-78AE70ABE090}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{289F9B41-3683-4EC2-A4D2-78AE70ABE090}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{289F9B41-3683-4EC2-A4D2-78AE70ABE090}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

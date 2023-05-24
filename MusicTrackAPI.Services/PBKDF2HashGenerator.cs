@@ -1,6 +1,5 @@
-﻿using System;
-using System.Security.Cryptography;
-using System.Text;
+﻿using System.Security.Cryptography;
+using MusicTrackAPI.Services.Model;
 
 namespace MusicTrackAPI.Services
 {
@@ -31,14 +30,6 @@ namespace MusicTrackAPI.Services
 
             return Convert.ToBase64String(pbkdf2.GetBytes(HASH_SIZE)) == oldPassword;
         }
-    }
-
-
-    public class HashResult
-    {
-        public string Hash { get; set; }
-
-        public string Salt { get; set; }
     }
 }
 

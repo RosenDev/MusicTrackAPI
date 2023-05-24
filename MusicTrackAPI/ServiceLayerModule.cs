@@ -15,6 +15,7 @@ namespace MusicTrackAPI
             builder.RegisterType<TrackService>().As<ITrackService>().InstancePerLifetimeScope();
             builder.RegisterType<AlbumService>().As<IAlbumService>().InstancePerLifetimeScope();
             builder.RegisterType<PlaylistService>().As<IPlaylistService>().InstancePerLifetimeScope();
+            builder.RegisterGeneric(typeof(DataService<,>)).As(typeof(IDataService<,>)).InstancePerLifetimeScope();
         }
     }
 }

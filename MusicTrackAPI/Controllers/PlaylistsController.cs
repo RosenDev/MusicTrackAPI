@@ -1,5 +1,6 @@
-﻿using Autofac;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using MusicTrackAPI.Commands.Playlist;
 using MusicTrackAPI.Data.Domain;
 using MusicTrackAPI.Model;
 using MusicTrackAPI.Model.Playlist;
@@ -11,29 +12,43 @@ namespace MusicTrackAPI.Controllers
     public class PlaylistsController : ApiController<Playlist, PlaylistModel>
     {
         private readonly IPlaylistService playlistService;
+        private readonly IMediator mediator;
 
-        public PlaylistsController(IPlaylistService playlistService, ILogger<PlaylistsController> logger)
-            : base(playlistService, logger)
+        public PlaylistsController(
+            IMediator mediator,
+            IDataService<Playlist, PlaylistModel> dataService,
+            ILogger<PlaylistsController> logger
+            )
+            : base(dataService, logger)
         {
-            this.playlistService = playlistService;
+            this.mediator = mediator;
         }
 
         [HttpPost]
         public async Task<IActionResult> CreatePlaylistAsync([FromBody] PlaylistCreateModel createPlaylistModel, CancellationToken ct)
         {
-            return Ok(await playlistService.CreatePlaylistAsync(createPlaylistModel, ct));
+            return Ok(await mediator.Send(new CreatePlaylistCommand
+            {
+                PlaylistCreateModel = createPlaylistModel
+            }));
         }
 
         [HttpPut]
         public async Task<IActionResult> UpdatePlaylistAsync([FromBody] PlaylistUpdateModel updatePlaylistModel, CancellationToken ct)
         {
-            return Ok(await playlistService.UpdatePlaylistAsync(updatePlaylistModel, ct));
+            return Ok(await mediator.Send(new UpdatePlaylistCommand
+            {
+                PlaylistUpdateModel = updatePlaylistModel
+            }));
         }
 
         [HttpPost("insert-track")]
-        public async Task<IActionResult> InsertTrackInPlaylistAsync([FromBody] InsertTrackInPlaylistModel updatePlaylistModel, CancellationToken ct)
+        public async Task<IActionResult> InsertTrackInPlaylistAsync([FromBody] InsertTrackInPlaylistModel insertTrackInPlaylistModel, CancellationToken ct)
         {
-            return Ok(await playlistService.InsertTrackAsync(updatePlaylistModel.PlaylistId, updatePlaylistModel.TrackPosition, updatePlaylistModel.TrackId, ct));
+            return Ok(await mediator.Send(new InsertTrackInPlaylistCommand
+            {
+                InsertTrackInPlaylistModel = insertTrackInPlaylistModel
+            }));
         }
     }
 }

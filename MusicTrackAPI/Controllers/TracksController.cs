@@ -1,33 +1,42 @@
-﻿using Autofac;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using MusicTrackAPI.Commands.Playlist;
 using MusicTrackAPI.Data.Domain;
-using MusicTrackAPI.Model;
-using MusicTrackAPI.Model.Album;
 using MusicTrackAPI.Model.Track;
-using MusicTrackAPI.Services;
 using MusicTrackAPI.Services.Interface;
 
 namespace MusicTrackAPI.Controllers
 {
     public class TracksController : ApiController<Track, TrackModel>
     {
-        private readonly ITrackService trackService;
+        private readonly IMediator mediator;
 
-        public TracksController(ITrackService trackService, ILogger<TracksController> logger) : base(trackService, logger)
+        public TracksController(
+            IMediator mediator,
+            IDataService<Track, TrackModel> dataService,
+            ILogger<TracksController> logger
+            )
+            : base(dataService, logger)
         {
-            this.trackService = trackService;
+            this.mediator = mediator;
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateTrackAsync([FromBody] TrackCreateModel createTrackModel, CancellationToken ct)
         {
-            return Ok(await trackService.CreateTrackAsync(createTrackModel, ct));
+            return Ok(await mediator.Send(new CreateTrackCommand
+            {
+                TrackCreateModel = createTrackModel
+            }));
         }
 
         [HttpPut]
         public async Task<IActionResult> UpdateTrackAsync([FromBody] TrackUpdateModel updateTrackModel, CancellationToken ct)
         {
-            return Ok(await trackService.UpdateTrackAsync(updateTrackModel, ct));
+            return Ok(await mediator.Send(new UpdateTrackCommand
+            {
+                TrackUpdateModel = updateTrackModel
+            }));
         }
     }
 }
