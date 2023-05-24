@@ -11,7 +11,6 @@ namespace MusicTrackAPI.Controllers
 {
     public class PlaylistsController : ApiController<Playlist, PlaylistModel>
     {
-        private readonly IPlaylistService playlistService;
         private readonly IMediator mediator;
 
         public PlaylistsController(
