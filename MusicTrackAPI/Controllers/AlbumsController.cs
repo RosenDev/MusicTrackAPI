@@ -13,10 +13,10 @@ namespace MusicTrackAPI.Controllers
 
         public AlbumsController(
             IMediator mediator,
-            IDataService<Album, AlbumModel> dataService,
+            IAlbumService albumService,
             ILogger<AlbumsController> logger
             )
-            : base(dataService, logger)
+            : base(albumService, logger)
         {
             this.mediator = mediator;
         }

@@ -24,7 +24,7 @@ public class PlaylistServiceTests
         };
         var testData = new List<PlaylistModel> { testPlaylist };
         playlistServiceMock.Setup(x => x.QueryAsync(It.IsAny<List<FieldFilter>>(), It.IsAny<Paging>(), default))
-            .ReturnsAsync(() => new PagedResponse<PlaylistModel> { Result = testData });
+            .ReturnsAsync(() => new PagedResponse<PlaylistModel>(testData, 1, 1, 1));
 
         var playlistService = playlistServiceMock.Object;
 
@@ -38,7 +38,7 @@ public class PlaylistServiceTests
 
         var testData = new List<PlaylistModel>();
         playlistServiceMock.Setup(x => x.QueryAsync(It.IsAny<List<FieldFilter>>(), It.IsAny<Paging>(), default))
-           .ReturnsAsync(() => new PagedResponse<PlaylistModel> { Result = testData });
+           .ReturnsAsync(() => new PagedResponse<PlaylistModel>(testData, 1, 1, 1));
 
         var playlistService = playlistServiceMock.Object;
 

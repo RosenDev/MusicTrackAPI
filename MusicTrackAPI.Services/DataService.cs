@@ -1,13 +1,13 @@
 ﻿
 using System.Linq.Expressions;
 using AutoMapper;
+using Microsoft.Extensions.Logging;
 using MusicTrackAPI.Common;
+using MusicTrackAPI.Data.Domain;
 using MusicTrackAPI.Data.Domain.Interface;
 using MusicTrackAPI.Data.Repositories.Interfaces;
 using MusicTrackAPI.Model.Interface;
 using MusicTrackAPI.Services.Interface;
-using Microsoft.Extensions.Logging;
-using MusicTrackAPI.Data.Domain;
 
 namespace MusicTrackAPI.Services
 {
@@ -38,15 +38,10 @@ namespace MusicTrackAPI.Services
         public virtual async Task<PagedResponse<TApiEntity>> QueryAsync(List<FieldFilter> filters, Paging paging, CancellationToken ct)
         {
 
+            var totalCount = await repositoryBase.CountAsync(ParseFilters(filters));
             var result = mapper.Map<List<TApiEntity>>(await repositoryBase.QueryAsync(ParseFilters(filters), paging, ct));
 
-            return new PagedResponse<TApiEntity>
-            {
-                Result = result,
-                Page = paging.Page,
-                Size = paging.Size,
-                TotalRecords = result.Count
-            };
+            return new PagedResponse<TApiEntity>(result, paging.Page, paging.Size, totalCount);
         }
 
         public virtual async Task<bool> DeleteAsync(int id, CancellationToken ct)
@@ -60,38 +55,36 @@ namespace MusicTrackAPI.Services
 
             try
             {
-               foreach(var filter in filters)
+                foreach(var filter in filters)
                 {
-                    switch (filter.Type)
+                    switch(filter.Type)
                     {
                         case FieldValueType.Number:
 
-                            parsedFilters.Add(BuildExpression(filter.Field, int.Parse(filter.Value)));
+                        parsedFilters.Add(BuildExpression(filter.Field, int.Parse(filter.Value)));
 
-                            break;
+                        break;
 
                         case FieldValueType.Text:
 
-                            parsedFilters.Add(BuildExpression(filter.Field, filter.Value));
+                        parsedFilters.Add(BuildExpression(filter.Field, filter.Value));
 
-                            break;
+                        break;
 
                         case FieldValueType.TrackType:
 
-                            parsedFilters.Add(BuildExpression(filter.Field, Enum.Parse<TrackType>(filter.Value)));
+                        parsedFilters.Add(BuildExpression(filter.Field, Enum.Parse<TrackType>(filter.Value)));
 
-                            break;
+                        break;
                         default:
-                            throw new InvalidOperationException("Invalid filter type!");
-                           
-                    }
+                        throw new InvalidOperationException("Invalid filter type!");
 
+                    }
                 }
 
                 return parsedFilters;
-
             }
-              catch(Exception ex)
+            catch(Exception ex)
             {
                 logger.LogWarning(ex.Message);
 
@@ -114,7 +107,7 @@ namespace MusicTrackAPI.Services
                 Expression.Lambda<Func<TEntity, bool>>(equality, new[] { parameter });
 
             return retVal;
-        }   
+        }
     }
 }
 

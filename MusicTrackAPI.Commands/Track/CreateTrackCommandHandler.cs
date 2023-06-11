@@ -1,9 +1,10 @@
 ﻿using MediatR;
+using MusicTrackAPI.Model;
 using MusicTrackAPI.Services.Interface;
 
 namespace MusicTrackAPI.Commands.Playlist
 {
-    public class CreateTrackCommandHandler : IRequestHandler<CreateTrackCommand, int>
+    public class CreateTrackCommandHandler : IRequestHandler<CreateTrackCommand, ApiResponse<int>>
     {
         private readonly ITrackService trackService;
 
@@ -11,9 +12,9 @@ namespace MusicTrackAPI.Commands.Playlist
         {
             this.trackService = trackService;
         }
-        public async Task<int> Handle(CreateTrackCommand request, CancellationToken cancellationToken)
+        public async Task<ApiResponse<int>> Handle(CreateTrackCommand request, CancellationToken cancellationToken)
         {
-            return await trackService.CreateTrackAsync(request.TrackCreateModel, cancellationToken);
+            return new ApiResponse<int>(await trackService.CreateTrackAsync(request.TrackCreateModel, cancellationToken));
         }
     }
 }
