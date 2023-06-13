@@ -26,7 +26,7 @@ public class TracksServiceTests
         };
         var testData = new List<TrackModel> { testTrack };
         trackServiceMock.Setup(x => x.QueryAsync(It.IsAny<List<FieldFilter>>(), It.IsAny<Paging>(), default))
-            .ReturnsAsync(() => new PagedResponse<TrackModel> { Result = testData });
+            .ReturnsAsync(() => new PagedResponse<TrackModel>(testData, 1, 1, 1));
 
         var trackService = trackServiceMock.Object;
 
@@ -39,7 +39,7 @@ public class TracksServiceTests
         var trackServiceMock = new Mock<ITrackService>();
         var testData = new List<TrackModel>();
         trackServiceMock.Setup(x => x.QueryAsync(It.IsAny<List<FieldFilter>>(), It.IsAny<Paging>(), default))
-            .ReturnsAsync(() => new PagedResponse<TrackModel> { Result = testData });
+            .ReturnsAsync(() => new PagedResponse<TrackModel>(testData, 1, 1, 1));
 
         var trackService = trackServiceMock.Object;
 
@@ -74,7 +74,7 @@ public class TracksServiceTests
     public async Task TrackService_GetByIdAsync_ShouldReturnNull_WhenTrackDoesNotExists()
     {
         var trackServiceMock = new Mock<ITrackService>();
- 
+
         trackServiceMock.Setup(x => x.GetByIdAsync(It.IsAny<int>(), default))
             .ReturnsAsync(() => null);
 
@@ -103,7 +103,7 @@ public class TracksServiceTests
 
         var trackService = trackServiceMock.Object;
 
-        Assert.Equal(testTrack.Id, await trackService.UpdateTrackAsync(new TrackUpdateModel {  Id = 7, ArrangedBy = "test"}, default));
+        Assert.Equal(testTrack.Id, await trackService.UpdateTrackAsync(new TrackUpdateModel { Id = 7, ArrangedBy = "test" }, default));
     }
 
     [Fact]

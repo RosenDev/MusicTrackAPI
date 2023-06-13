@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MusicTrackAPI.Common;
 using MusicTrackAPI.Data.Domain.Interface;
+using MusicTrackAPI.Model;
 using MusicTrackAPI.Model.Interface;
 using MusicTrackAPI.Services.Interface;
 
@@ -48,7 +49,8 @@ namespace MusicTrackAPI.Controllers
         {
             try
             {
-                return Ok(await dataService.GetByIdAsync(id, ct));
+                var response = new ApiResponse<TApiEntity>(await dataService.GetByIdAsync(id, ct));
+                return Ok(response);
             }
             catch(Exception ex)
             {
@@ -65,7 +67,7 @@ namespace MusicTrackAPI.Controllers
             {
                 await dataService.DeleteAsync(id, ct);
 
-                return Ok();
+                return Ok(ApiResponse.Ok());
             }
             catch(Exception ex)
             {

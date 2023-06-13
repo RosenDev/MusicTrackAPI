@@ -1,9 +1,10 @@
 ﻿using MediatR;
+using MusicTrackAPI.Model;
 using MusicTrackAPI.Services.Interface;
 
 namespace MusicTrackAPI.Commands.Album
 {
-    public class CreateAlbumCommandHandler : IRequestHandler<CreateAlbumCommand, int>
+    public class CreateAlbumCommandHandler : IRequestHandler<CreateAlbumCommand, ApiResponse<int>>
     {
         private readonly IAlbumService albumService;
 
@@ -12,9 +13,9 @@ namespace MusicTrackAPI.Commands.Album
             this.albumService = albumService;
         }
 
-        public async Task<int> Handle(CreateAlbumCommand request, CancellationToken cancellationToken)
+        public async Task<ApiResponse<int>> Handle(CreateAlbumCommand request, CancellationToken cancellationToken)
         {
-            return await albumService.CreateAlbumAsync(request.AlbumCreateModel, cancellationToken);
+            return new ApiResponse<int>(await albumService.CreateAlbumAsync(request.AlbumCreateModel, cancellationToken));
         }
     }
 }

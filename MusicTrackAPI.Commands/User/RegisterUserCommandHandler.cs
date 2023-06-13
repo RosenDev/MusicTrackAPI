@@ -1,9 +1,10 @@
 ﻿using MediatR;
+using MusicTrackAPI.Model;
 using MusicTrackAPI.Services.Interface;
 
 namespace MusicTrackAPI.Commands.Playlist
 {
-    public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, string>
+    public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, ApiResponse<string>>
     {
         private readonly IAuthenticationService authenticationService;
 
@@ -11,9 +12,9 @@ namespace MusicTrackAPI.Commands.Playlist
         {
             this.authenticationService = authenticationService;
         }
-        public async Task<string> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
+        public async Task<ApiResponse<string>> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
         {
-            return (await authenticationService.RegisterUserAsync(request.UserRegisterModel, cancellationToken)).Token;
+            return new ApiResponse<string>((await authenticationService.RegisterUserAsync(request.UserRegisterModel, cancellationToken)).Token);
         }
     }
 }

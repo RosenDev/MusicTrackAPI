@@ -1,5 +1,4 @@
-﻿using System;
-namespace MusicTrackAPI.Common
+﻿namespace MusicTrackAPI.Common
 {
     public class Paging
     {

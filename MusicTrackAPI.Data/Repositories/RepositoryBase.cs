@@ -23,7 +23,7 @@ namespace MusicTrackAPI.Data.Repositories
         {
             var entity = await Set.FindAsync(id);
 
-            if (entity != null)
+            if(entity != null)
             {
                 Set.Remove(entity);
             }
@@ -39,15 +39,7 @@ namespace MusicTrackAPI.Data.Repositories
 
         public virtual async Task<List<TEntity>> QueryAsync(List<Expression<Func<TEntity, bool>>> query, Paging paging, CancellationToken ct)
         {
-
-            var search = query[0];
-            var paramName = search.Parameters.First().Name;
-            var param = Expression.Parameter(typeof(TEntity), paramName);
-
-            for (int i = 1; i < query.Count; i++)
-            {
-                search = Expression.Lambda<Func<TEntity, bool>>(Expression.AndAlso(search.Body, query[i].Body), param);
-            }
+            var search = BuildSearchQuery(query);
 
             var result = await ApplyInclude(Set.Where(search)).AsNoTracking()
                 .Skip(paging.Page - 1)
@@ -85,6 +77,28 @@ namespace MusicTrackAPI.Data.Repositories
         protected virtual IQueryable<TEntity> ApplyInclude(IQueryable<TEntity> query)
         {
             return query;
+        }
+
+        public async Task<int> CountAsync(List<Expression<Func<TEntity, bool>>> query)
+        {
+            var search = BuildSearchQuery(query);
+
+            return await Set.CountAsync(search);
+        }
+
+        private Expression<Func<TEntity, bool>> BuildSearchQuery(List<Expression<Func<TEntity, bool>>> query)
+        {
+
+            var search = query[0];
+            var paramName = search.Parameters.First().Name;
+            var param = Expression.Parameter(typeof(TEntity), paramName);
+
+            for(int i = 1; i < query.Count; i++)
+            {
+                search = Expression.Lambda<Func<TEntity, bool>>(Expression.AndAlso(search.Body, query[i].Body), param);
+            }
+
+            return search;
         }
     }
 }

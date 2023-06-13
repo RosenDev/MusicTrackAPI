@@ -23,7 +23,7 @@ public class AlbumServiceTests
         };
         var testData = new List<AlbumModel> { testAlbum };
         albumServiceMock.Setup(x => x.QueryAsync(It.IsAny<List<FieldFilter>>(), It.IsAny<Paging>(), default))
-            .ReturnsAsync(() => new PagedResponse<AlbumModel> { Result = testData });
+            .ReturnsAsync(() => new PagedResponse<AlbumModel>(testData, 1, 1, 1));
 
         var albumService = albumServiceMock.Object;
 
@@ -34,16 +34,15 @@ public class AlbumServiceTests
     public async Task AlbumService_QueryAsync_ShouldNotReturnAlbums_WhenThereIsNoData()
     {
         var albumServiceMock = new Mock<IAlbumService>();
-     
+
         var testData = new List<AlbumModel>();
-         albumServiceMock.Setup(x => x.QueryAsync(It.IsAny<List<FieldFilter>>(), It.IsAny<Paging>(), default))
-            .ReturnsAsync(() => new PagedResponse<AlbumModel> { Result = testData });
+        albumServiceMock.Setup(x => x.QueryAsync(It.IsAny<List<FieldFilter>>(), It.IsAny<Paging>(), default))
+           .ReturnsAsync(() => new PagedResponse<AlbumModel>(testData, 1, 1, 1));
 
         var albumService = albumServiceMock.Object;
 
         Assert.Empty((await albumService.QueryAsync(new List<FieldFilter>(), new Paging(), default)).Result);
     }
-
 
     [Fact]
     public async Task AlbumService_GetByIdAsync_ShouldNotReturnNull_WhenAlbumExists()

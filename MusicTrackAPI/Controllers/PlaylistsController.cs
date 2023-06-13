@@ -6,10 +6,10 @@
 
         public PlaylistsController(
             IMediator mediator,
-            IDataService<Playlist, PlaylistModel> dataService,
+            IPlaylistService playlistService,
             ILogger<PlaylistsController> logger
             )
-            : base(dataService, logger)
+            : base(playlistService, logger)
         {
             this.mediator = mediator;
         }

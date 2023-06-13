@@ -4,7 +4,7 @@ using MusicTrackAPI.Services.Interface;
 
 namespace MusicTrackAPI.Commands.Playlist
 {
-    public class GetCurrentUserCommandHandler : IRequestHandler<GetCurrentUserCommand, UserModel>
+    public class GetCurrentUserCommandHandler : IRequestHandler<GetCurrentUserCommand, ApiResponse<UserModel>>
     {
         private readonly IUserService userService;
 
@@ -12,9 +12,9 @@ namespace MusicTrackAPI.Commands.Playlist
         {
             this.userService = userService;
         }
-        public async Task<UserModel> Handle(GetCurrentUserCommand request, CancellationToken cancellationToken)
+        public async Task<ApiResponse<UserModel>> Handle(GetCurrentUserCommand request, CancellationToken cancellationToken)
         {
-            return (await userService.GetUserAsync(request.Username, cancellationToken));
+            return new ApiResponse<UserModel>(await userService.GetUserAsync(request.Username, cancellationToken));
         }
     }
 }

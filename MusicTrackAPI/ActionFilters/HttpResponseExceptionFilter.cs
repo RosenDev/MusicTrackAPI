@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using MusicTrackAPI.Model;
+using StatusCodes = Microsoft.AspNetCore.Http.StatusCodes;
 
 namespace MusicTrackAPI.ActionFilters
 {
@@ -11,17 +13,15 @@ namespace MusicTrackAPI.ActionFilters
 
         public void OnActionExecuted(ActionExecutedContext context)
         {
-            if (context.Exception is Exception httpResponseException)
+            if(context.Exception is Exception httpResponseException)
             {
-                context.Result = new ObjectResult(httpResponseException)
+                context.Result = new ObjectResult(ApiResponse.InternalServerError(httpResponseException.Message))
                 {
-                    Value = httpResponseException.Message,
-
-                    StatusCode = 500
+                    StatusCode = StatusCodes.Status500InternalServerError
                 };
+            };
 
-                context.ExceptionHandled = true;
-            }
+            context.ExceptionHandled = true;
         }
     }
 }
