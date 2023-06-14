@@ -23,7 +23,7 @@ namespace MusicTrackAPI.Data.Repositories
         {
             var entity = await Set.FindAsync(id);
 
-            if(entity != null)
+            if (entity != null)
             {
                 Set.Remove(entity);
             }
@@ -39,6 +39,14 @@ namespace MusicTrackAPI.Data.Repositories
 
         public virtual async Task<List<TEntity>> QueryAsync(List<Expression<Func<TEntity, bool>>> query, Paging paging, CancellationToken ct)
         {
+            if(query.Count == 0)
+            {
+                return await ApplyInclude(Set).AsNoTracking()
+                .Skip(paging.Page - 1)
+                .Take(paging.Size)
+                .ToListAsync(ct);
+            }
+
             var search = BuildSearchQuery(query);
 
             var result = await ApplyInclude(Set.Where(search)).AsNoTracking()
@@ -81,6 +89,11 @@ namespace MusicTrackAPI.Data.Repositories
 
         public async Task<int> CountAsync(List<Expression<Func<TEntity, bool>>> query)
         {
+            if(query.Count == 0)
+            {
+                return await Set.CountAsync();
+            }
+
             var search = BuildSearchQuery(query);
 
             return await Set.CountAsync(search);
