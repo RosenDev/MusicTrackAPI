@@ -1,5 +1,3 @@
 # MusicTrackAPI
 
-## For Development configuration you can use Swagger
-
-## For Production you can use Postman
+## To setup your mysql connection put it as environemnt variable (can be in launchSettings.json) using the following name: "ConnectionStrings:MySqlConnection"
