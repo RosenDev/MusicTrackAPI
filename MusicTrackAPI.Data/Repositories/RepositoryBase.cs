@@ -70,11 +70,6 @@ namespace MusicTrackAPI.Data.Repositories
 
         public virtual async Task<TEntity> UpdateAsync(TEntity entity, CancellationToken ct)
         {
-
-            var existingEnitity = await Set.FirstOrDefaultAsync(x => x.Id == entity.Id, ct);
-
-            entity.CreatedAt = existingEnitity.CreatedAt;
-
             Set.Update(entity);
 
             await Context.SaveChangesAsync(ct);
