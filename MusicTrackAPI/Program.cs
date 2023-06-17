@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using System.Text.Json.Serialization;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -49,7 +50,11 @@ public class Program
             options.UseDateOnlyTimeOnlyStringConverters();
             options.Filters.Add<HttpResponseExceptionFilter>();
         })
-        .AddJsonOptions(options => options.UseDateOnlyTimeOnlyStringConverters());
+        .AddJsonOptions(options =>
+        {
+            options.UseDateOnlyTimeOnlyStringConverters();
+            options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+        });
 
         builder.Services.AddEndpointsApiExplorer();
 
