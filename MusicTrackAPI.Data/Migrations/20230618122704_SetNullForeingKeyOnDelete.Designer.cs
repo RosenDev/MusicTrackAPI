@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MusicTrackAPI.Data;
 
@@ -10,9 +11,11 @@ using MusicTrackAPI.Data;
 namespace MusicTrackAPI.Data.Migrations
 {
     [DbContext(typeof(MusicTrackAPIDbContext))]
-    partial class MusicTrackAPIDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230618122704_SetNullForeingKeyOnDelete")]
+    partial class SetNullForeingKeyOnDelete
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,7 +58,7 @@ namespace MusicTrackAPI.Data.Migrations
 
                     b.HasIndex("Name", "PublishingYear", "Duration");
 
-                    b.ToTable("Albums", (string)null);
+                    b.ToTable("Albums");
                 });
 
             modelBuilder.Entity("MusicTrackAPI.Data.Domain.Playlist", b =>
@@ -98,7 +101,7 @@ namespace MusicTrackAPI.Data.Migrations
 
                     b.HasIndex("CreatedAt", "Name");
 
-                    b.ToTable("Playlists", (string)null);
+                    b.ToTable("Playlists");
                 });
 
             modelBuilder.Entity("MusicTrackAPI.Data.Domain.Track", b =>
@@ -153,7 +156,7 @@ namespace MusicTrackAPI.Data.Migrations
 
                     b.HasIndex("ArrangedBy", "PerformedBy", "Name", "Type");
 
-                    b.ToTable("Tracks", (string)null);
+                    b.ToTable("Tracks");
                 });
 
             modelBuilder.Entity("MusicTrackAPI.Data.Domain.TrackPlaylist", b =>
@@ -190,7 +193,7 @@ namespace MusicTrackAPI.Data.Migrations
 
                     b.HasIndex("TrackId");
 
-                    b.ToTable("TrackPlaylist", (string)null);
+                    b.ToTable("TrackPlaylist");
                 });
 
             modelBuilder.Entity("MusicTrackAPI.Data.Domain.User", b =>
@@ -234,7 +237,7 @@ namespace MusicTrackAPI.Data.Migrations
                     b.HasIndex("Username")
                         .IsUnique();
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("MusicTrackAPI.Data.Domain.Playlist", b =>

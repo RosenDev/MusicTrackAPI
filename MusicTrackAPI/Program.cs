@@ -45,14 +45,13 @@ public class Program
         });
 
 
+        builder.Services.AddDateOnlyTimeOnlyStringConverters();
         builder.Services.AddControllers(options =>
         {
-            options.UseDateOnlyTimeOnlyStringConverters();
             options.Filters.Add<HttpResponseExceptionFilter>();
         })
         .AddJsonOptions(options =>
         {
-            options.UseDateOnlyTimeOnlyStringConverters();
             options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
         });
 
@@ -115,6 +114,7 @@ public class Program
 
         if(pendingMigrations.Count() > 0)
         {
+            await Console.Out.WriteLineAsync(string.Join("\n", pendingMigrations));
             await dbContext.Database.MigrateAsync();
         }
 

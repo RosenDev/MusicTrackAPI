@@ -19,8 +19,10 @@ namespace MusicTrackAPI.Services
         public static IServiceCollection AddAppServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<MusicTrackAPIDbContext>(opts =>
-            opts.UseMySql(configuration.GetConnectionString("MySqlConnection"),
-            ServerVersion.AutoDetect(configuration.GetConnectionString("MySqlConnection"))));
+            {
+                opts.UseMySql(configuration.GetConnectionString("MySqlConnection"), ServerVersion.AutoDetect(configuration.GetConnectionString("MySqlConnection")));
+                opts.EnableSensitiveDataLogging();
+            });
             services.AddMediatR(x => x.RegisterServicesFromAssembly(typeof(CreatePlaylistCommand).Assembly));
 
             services.AddDatabaseLayerServices();

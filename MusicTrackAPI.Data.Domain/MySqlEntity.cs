@@ -1,9 +1,11 @@
-﻿using MusicTrackAPI.Data.Domain.Interface;
+﻿using System.ComponentModel.DataAnnotations;
+using MusicTrackAPI.Data.Domain.Interface;
 
 namespace MusicTrackAPI.Data.Domain;
 
 public class MySqlEntity : IEntity<int>
 {
+    [Key]
     public int Id { get; set; }
 
     public DateTime CreatedAt { get; set; }
