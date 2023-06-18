@@ -1,16 +1,4 @@
-﻿using System.Text;
-using System.Text.Json.Serialization;
-using Autofac.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Any;
-using Microsoft.OpenApi.Models;
-using MusicTrackAPI.ActionFilters;
-using MusicTrackAPI.Data;
-using MusicTrackAPI.Services;
-
-namespace MusicTrackAPI;
+﻿namespace MusicTrackAPI;
 
 public class Program
 {
@@ -45,14 +33,13 @@ public class Program
         });
 
 
+        builder.Services.AddDateOnlyTimeOnlyStringConverters();
         builder.Services.AddControllers(options =>
         {
-            options.UseDateOnlyTimeOnlyStringConverters();
             options.Filters.Add<HttpResponseExceptionFilter>();
         })
         .AddJsonOptions(options =>
         {
-            options.UseDateOnlyTimeOnlyStringConverters();
             options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
         });
 
@@ -115,6 +102,7 @@ public class Program
 
         if(pendingMigrations.Count() > 0)
         {
+            await Console.Out.WriteLineAsync(string.Join("\n", pendingMigrations));
             await dbContext.Database.MigrateAsync();
         }
 

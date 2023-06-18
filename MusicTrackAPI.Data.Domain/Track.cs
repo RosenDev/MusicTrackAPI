@@ -1,6 +1,6 @@
 ﻿namespace MusicTrackAPI.Data.Domain;
 
-public class Track: MySqlEntity
+public class Track : MySqlEntity
 {
     public string Name { get; set; }
     public string WrittenBy { get; set; }
@@ -10,7 +10,7 @@ public class Track: MySqlEntity
     public TrackType Type { get; set; }
 
     public int? AlbumId { get; set; }
-    public Album Album { get; set; }
+    public Album? Album { get; set; }
 
     public ICollection<TrackPlaylist> TracksPlaylists { get; set; }
 }
