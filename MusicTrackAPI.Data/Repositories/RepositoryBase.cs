@@ -23,7 +23,7 @@ namespace MusicTrackAPI.Data.Repositories
         {
             var entity = await Set.FindAsync(id);
 
-            if(entity != null)
+            if (entity != null)
             {
                 Set.Remove(entity);
             }
