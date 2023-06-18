@@ -1,16 +1,4 @@
-﻿using System.Text;
-using System.Text.Json.Serialization;
-using Autofac.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Any;
-using Microsoft.OpenApi.Models;
-using MusicTrackAPI.ActionFilters;
-using MusicTrackAPI.Data;
-using MusicTrackAPI.Services;
-
-namespace MusicTrackAPI;
+﻿namespace MusicTrackAPI;
 
 public class Program
 {
